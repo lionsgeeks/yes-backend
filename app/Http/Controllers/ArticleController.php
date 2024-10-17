@@ -87,7 +87,33 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'title.en' => 'required|string',
+            'title.ar' => 'required|string',
+            'description' => 'required',
+            'description.en' => 'required|string',
+            'description.ar' => 'required|string',
+            'tags' => 'required',
+            'tags.en' => 'required|string',
+            'tags.ar' => 'required|string',
+        ]);
+
+        $theImg = $request->image;
+        if ($theImg) {
+            $imageName = time() .  $theImg->getClientOriginalName();
+            $theImg->storeAs('images', $imageName, 'public');
+        }
+
+        $article->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'tags' => $request->input('tags'),
+            'image' => $theImg ? $imageName : $article->image,
+        ]);
+
+        return back()->with('success', 'Article Updated Successfully!!');
+
     }
 
     /**

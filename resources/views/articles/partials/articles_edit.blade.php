@@ -9,8 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div x-data="{ tab: 'English' }" class="flex-[44%] p-[1.25rem] bg-white rounded-lg">
                             <h5 class="mb-[1rem]">Create An Article: </h5>
 
@@ -31,7 +32,7 @@
                                             <label for="title_en" class="w-full font-bolder text-base">Article
                                                 Title: </label>
                                             <input class="rounded w-full" type="text" id="title_en"
-                                                placeholder="Title..." value={{$article->title->en}} name="title[en]"
+                                                placeholder="Title..." value={{ $article->title->en }} name="title[en]"
                                                 required>
                                         </div>
 
@@ -39,7 +40,7 @@
                                             <label for="description_en" class="w-full font-bolder text-base">Article
                                                 Description: </label>
                                             <textarea class="rounded w-full" type="text" placeholder="Description..." id="description_en" required
-                                                name="description[en]" rows="5">{{$article->title->en}}</textarea>
+                                                name="description[en]" rows="5">{{ $article->description->en }}</textarea>
                                         </div>
 
 
@@ -47,7 +48,7 @@
                                             <label for="tags_en" class="w-full font-bolder text-base">Article
                                                 Tags:</label>
                                             <input type="text" class="rounded w-full" id="tags_en"
-                                                placeholder="Tags..." value={{$article->tags->en}} name="tags[en]">
+                                                placeholder="Tags..." value={{ $article->tags->en }} name="tags[en]">
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +59,8 @@
                                         <div class="flex flex-col gap-[0.5rem]">
                                             <label for="title_ar" class="text-base">الاسم</label>
                                             <input class="rounded text-end" type="text" placeholder="...الاسم"
-                                                name="title[ar]" id="title_ar" value={{$article->title->ar}} required>
+                                                name="title[ar]" id="title_ar" value={{ $article->title->ar }}
+                                                required>
                                         </div>
 
                                         <div class="flex flex-col gap-[0.5rem]">
@@ -71,13 +73,18 @@
                                             <label for="tags_ar" class="w-full font-bolder text-base text-end">:علامات
                                                 المقال</label>
                                             <input type="text" class="rounded w-full text-end" id="tags_ar"
-                                                placeholder="...العلامات" value={{$article->tags->ar}} name="tags[ar]">
+                                                placeholder="...العلامات" value={{ $article->tags->ar }}
+                                                name="tags[ar]">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="flex flex-col gap-2">
                                     <p class="text-base m-0">Images</p>
+
+                                    {{-- <img class="w-full h-[50vh] object-cover rounded border"
+                                        src="{{ asset('storage/images/' . $article->image) }}" alt=""> --}}
+
                                     <label for="image"
                                         class="p-[0.75rem] cursor-pointer flex gap-2 items-center border-[1.5px] border-gray-500 rounded">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -90,7 +97,7 @@
                                         </span>
                                     </label>
                                     <input class="hidden" type="file" placeholder="image" accept="image/*"
-                                        name="image" id="image" required>
+                                        name="image" id="image">
                                 </div>
 
                             </div>

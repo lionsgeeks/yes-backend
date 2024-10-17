@@ -24,7 +24,7 @@
                     {{-- All your articles --}}
                     <div>
                         <table class="w-full">
-                            <thead class="w-full">
+                            <thead>
                                 <th>image</th>
                                 <th>title</th>
                                 <th>creation date</th>
@@ -34,9 +34,9 @@
 
                             <tbody class="w-full">
                                 @foreach ($articles as $article)
-                                    <tr>
+                                    <tr class="w-full">
                                         <td>
-                                            <img src="{{ asset('storage/images/' . $article->image) }}"
+                                            <img class="w-[250px] object-cover" src="{{ asset('storage/images/' . $article->image) }}"
                                                 alt="">
                                         </td>
                                         <td>
