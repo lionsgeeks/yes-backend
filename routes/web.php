@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MesageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,10 @@ Route::get('/', function () {
 });
 
 Route::resource('articles', ArticleController::class);
+Route::get('/messages', [MesageController::class,'index'])->name('message.index');
+Route::put('/messages/markread/{message}', [MesageController::class,'update'])->name('message.markread');
+Route::delete('/messages/delete/{message}', [MesageController::class,'destroy'])->name('message.delete');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

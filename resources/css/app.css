@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+#messagesColumn::-webkit-scrollbar {
+display: none;
+}
