@@ -34,9 +34,9 @@
 
                             <tbody class="w-full">
                                 @foreach ($articles as $article)
-                                    <tr class="w-full">
-                                        <td>
-                                            <img class="w-[250px] object-cover" src="{{ asset('storage/images/' . $article->image) }}"
+                                    <tr class="w-full text-center">
+                                        <td class="flex items-center justify-center">
+                                            <img class="w-[100px] object-cover" src="{{ asset('storage/images/' . $article->image) }}"
                                                 alt="">
                                         </td>
                                         <td>

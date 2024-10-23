@@ -40,8 +40,11 @@
                                             <div class="flex flex-col gap-[0.5rem]">
                                                 <label for="description_en" class="w-full font-bolder text-base">Article
                                                     Description: </label>
-                                                <textarea class="rounded w-full" type="text" placeholder="Description..." id="description_en" required
-                                                    name="description[en]" rows="5">{{ old('description.en') }}</textarea>
+                                                {{-- <textarea class="rounded w-full" type="text" placeholder="Description..." id="description_en" required
+                                                    name="description[en]" rows="5">{{ old('description.en') }}</textarea> --}}
+
+                                                <div id="quill-editor_en" class="mb-3" style="height: 300px;"></div>
+                                                <textarea rows="3" class="w-full hidden" name="description[en]" id="description_en"></textarea>
                                             </div>
 
 
@@ -49,7 +52,7 @@
                                                 <label for="tags_en" class="w-full font-bolder text-base">Article
                                                     Tags:</label>
                                                 <input type="text" class="rounded w-full" id="tags_en"
-                                                    placeholder="Tags..." value="{{ old('tags.en') }}" name="tags[en]">
+                                                    placeholder="Please Separate the Tags witha comma. (example: tag1, tag2...)" value="{{ old('tags.en') }}" name="tags[en]">
                                             </div>
                                         </div>
                                     </div>
@@ -66,15 +69,19 @@
 
                                             <div class="flex flex-col gap-[0.5rem]">
                                                 <label for="description_ar" class="text-base">وصف الحدث</label>
-                                                <textarea class="rounded text-end" type="text" placeholder="...وصف الحدث" name="description[ar]" id="description_ar"
-                                                    rows="5" required>{{ old('description.ar') }}</textarea>
+                                                {{-- <textarea class="rounded text-end" type="text" placeholder="...وصف الحدث" name="description[ar]" id="description_ar"
+                                                    rows="5" required>{{ old('description.ar') }}</textarea> --}}
+
+
+                                                <div id="quill-editor_ar" class="mb-3" style="height: 300px;"></div>
+                                                <textarea rows="3" class="w-full hidden" name="description[ar]" id="description_ar"></textarea>
                                             </div>
 
                                             <div class="flex flex-col gap-[0.5rem]">
                                                 <label for="tags_ar"
                                                     class="w-full font-bolder text-base text-end">:علامات المقال</label>
                                                 <input type="text" class="rounded w-full text-end" id="tags_ar"
-                                                    placeholder="...العلامات" value="{{ old('tags.ar') }}"
+                                                    placeholder="يرجى فصل العلامات بفاصلة. (مثال: العلامة 1، العلامة 2...)" value="{{ old('tags.ar') }}"
                                                     name="tags[ar]">
                                             </div>
                                         </div>
@@ -108,4 +115,78 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('description_en')) {
+                var editor_en = new Quill('#quill-editor_en', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{
+                                header: [1, 2, 3, false]
+                            }],
+                            ['bold', 'underline', 'code', 'strike', { align: ['justify','center', 'right'] }],
+
+                            ['link', {
+                                list: 'ordered'
+                            }, {
+                                list: 'bullet'
+                            }]
+                        ],
+                    },
+                });
+                var quillEditor_en = document.getElementById('description_en');
+                editor_en.on('text-change', function() {
+                    quillEditor_en.value = editor_en.root.innerHTML;
+                });
+                quillEditor_en.addEventListener('input', function() {
+                    editor_en.root.innerHTML = quillEditor_en.value;
+                });
+            }
+            var quillEditor_en = document.getElementById('description_en');
+            editor_en.on('text-change', function() {
+                quillEditor_en.value = editor.root.innerHTML;
+            });
+            quillEditor_en.addEventListener('input', function() {
+                editor_en.root.innerHTML = quillEditor_en.value;
+            });
+
+
+            if (document.getElementById('description_ar')) {
+                var editor_ar = new Quill('#quill-editor_ar', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{
+                                header: [1, 2, 3, false]
+                            }],
+                            ['bold', 'underline', 'code', 'strike', 'blockquote'],
+
+                            ['link', {
+                                list: 'ordered'
+                            }, {
+                                list: 'bullet'
+                            }]
+                        ],
+                    },
+                });
+                var quillEditor_ar = document.getElementById('description_ar');
+                editor_ar.on('text-change', function() {
+                    quillEditor_ar.value = editor_ar.root.innerHTML;
+                });
+                quillEditor_ar.addEventListener('input', function() {
+                    editor_ar.root.innerHTML = quillEditor_ar.value;
+                });
+            }
+            var quillEditor_ar = document.getElementById('description_ar');
+            editor_ar.on('text-change', function() {
+                quillEditor_ar.value = editor_ar.root.innerHTML;
+            });
+            quillEditor_ar.addEventListener('input', function() {
+                editor_ar.root.innerHTML = quillEditor_ar.value;
+            });
+        });
+    </script>
 </x-app-layout>

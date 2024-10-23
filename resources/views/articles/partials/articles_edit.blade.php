@@ -32,15 +32,19 @@
                                             <label for="title_en" class="w-full font-bolder text-base">Article
                                                 Title: </label>
                                             <input class="rounded w-full" type="text" id="title_en"
-                                                placeholder="Title..." value={{ $article->title->en }} name="title[en]"
+                                                placeholder="Title..." value="{{ $article->title->en }}" name="title[en]"
                                                 required>
-                                        </div>
+
+                                            </div>
 
                                         <div class="flex flex-col gap-[0.5rem]">
                                             <label for="description_en" class="w-full font-bolder text-base">Article
                                                 Description: </label>
-                                            <textarea class="rounded w-full" type="text" placeholder="Description..." id="description_en" required
-                                                name="description[en]" rows="5">{{ $article->description->en }}</textarea>
+                                            {{-- <textarea class="rounded w-full" type="text" placeholder="Description..." id="description_en" required
+                                                name="description[en]" rows="5">{{ $article->description->en }}</textarea> --}}
+
+                                            <div id="quill-editor_en" class="mb-3" style="height: 300px;"></div>
+                                            <textarea rows="3" class="w-full hidden" name="description[en]" id="description_en">{{$article->description->en}}</textarea>
                                         </div>
 
 
@@ -48,33 +52,35 @@
                                             <label for="tags_en" class="w-full font-bolder text-base">Article
                                                 Tags:</label>
                                             <input type="text" class="rounded w-full" id="tags_en"
-                                                placeholder="Tags..." value={{ $article->tags->en }} name="tags[en]">
+                                                placeholder="Tags..." value="{{ $article->tags->en }}" name="tags[en]">
                                         </div>
                                     </div>
                                 </div>
 
 
                                 <div x-show="tab === 'العربية'">
-                                    <div class="flex flex-col gap-y-[0.75rem] text-end">
-                                        <div class="flex flex-col gap-[0.5rem]">
+                                    <div class="flex flex-col gap-y-[0.75rem]">
+                                        <div class="flex flex-col gap-[0.5rem] text-end">
                                             <label for="title_ar" class="text-base">الاسم</label>
                                             <input class="rounded text-end" type="text" placeholder="...الاسم"
-                                                name="title[ar]" id="title_ar" value={{ $article->title->ar }}
+                                                name="title[ar]" id="title_ar" value="{{ $article->title->ar }}"
                                                 required>
                                         </div>
 
                                         <div class="flex flex-col gap-[0.5rem]">
-                                            <label for="description_ar" class="text-base">وصف الحدث</label>
-                                            <textarea class="rounded text-end" type="text" placeholder="...وصف الحدث" name="description[ar]" id="description_ar"
-                                                rows="5" required>{{ $article->description->ar }}</textarea>
+                                            <label for="description_ar" class="text-base text-end">وصف الحدث</label>
+                                            {{-- <textarea class="rounded text-end" type="text" placeholder="...وصف الحدث" name="description[ar]" id="description_ar"
+                                                rows="5" required>{{ $article->description->ar }}</textarea> --}}
+
+                                            <div id="quill-editor_ar" class="mb-3" style="height: 300px;"></div>
+                                            <textarea rows="3" class="w-full hidden" name="description[ar]" id="description_ar">{{ $article->description->ar }}</textarea>
                                         </div>
 
                                         <div class="flex flex-col gap-[0.5rem]">
                                             <label for="tags_ar" class="w-full font-bolder text-base text-end">:علامات
                                                 المقال</label>
                                             <input type="text" class="rounded w-full text-end" id="tags_ar"
-                                                placeholder="...العلامات" value={{ $article->tags->ar }}
-                                                name="tags[ar]">
+                                                placeholder="...العلامات" value="{{ $article->tags->ar }}" name="tags[ar]">
                                         </div>
                                     </div>
                                 </div>
@@ -110,4 +116,87 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('description_en')) {
+                var editor_en = new Quill('#quill-editor_en', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{
+                                header: [1, 2, 3, false]
+                            }],
+                            ['bold', 'underline', 'code', 'strike', { align: ['justify','center', 'right'] }],
+
+                            ['link', {
+                                list: 'ordered'
+                            }, {
+                                list: 'bullet'
+                            }]
+                        ],
+                    },
+                });
+
+                // i have no f idea what this is
+                var desc_en = @json($article->description->en);
+                editor_en.clipboard.dangerouslyPasteHTML(desc_en);
+
+
+                var quillEditor_en = document.getElementById('description_en');
+                editor_en.on('text-change', function() {
+                    quillEditor_en.value = editor_en.root.innerHTML;
+                });
+                quillEditor_en.addEventListener('input', function() {
+                    editor_en.root.innerHTML = quillEditor_en.value;
+                });
+            }
+            var quillEditor_en = document.getElementById('description_en');
+            editor_en.on('text-change', function() {
+                quillEditor_en.value = editor.root.innerHTML;
+            });
+            quillEditor_en.addEventListener('input', function() {
+                editor_en.root.innerHTML = quillEditor_en.value;
+            });
+
+
+            if (document.getElementById('description_ar')) {
+                var editor_ar = new Quill('#quill-editor_ar', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{
+                                header: [1, 2, 3, false]
+                            }],
+                            ['bold', 'underline', 'code', 'strike', 'blockquote'],
+
+                            ['link', {
+                                list: 'ordered'
+                            }, {
+                                list: 'bullet'
+                            }]
+                        ],
+                    },
+                });
+
+                var desc_ar = @json($article->description->ar);
+                editor_ar.clipboard.dangerouslyPasteHTML(desc_ar);
+                var quillEditor_ar = document.getElementById('description_ar');
+                editor_ar.on('text-change', function() {
+                    quillEditor_ar.value = editor_ar.root.innerHTML;
+                });
+                quillEditor_ar.addEventListener('input', function() {
+                    editor_ar.root.innerHTML = quillEditor_ar.value;
+                });
+            }
+            var quillEditor_ar = document.getElementById('description_ar');
+            editor_ar.on('text-change', function() {
+                quillEditor_ar.value = editor_ar.root.innerHTML;
+            });
+            quillEditor_ar.addEventListener('input', function() {
+                editor_ar.root.innerHTML = quillEditor_ar.value;
+            });
+        });
+    </script>
 </x-app-layout>
