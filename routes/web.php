@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\MesageController;
-=======
 use App\Http\Controllers\FormulaireController;
->>>>>>> Stashed changes
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,14 +11,11 @@ Route::get('/', function () {
 });
 
 Route::resource('articles', ArticleController::class);
-<<<<<<< Updated upstream
 Route::get('/messages', [MesageController::class,'index'])->name('message.index');
 Route::put('/messages/markread/{message}', [MesageController::class,'update'])->name('message.markread');
 Route::delete('/messages/delete/{message}', [MesageController::class,'destroy'])->name('message.delete');
 
-=======
 Route::get('/formulaire', [FormulaireController::class, 'index'])->name('form.index');
->>>>>>> Stashed changes
 
 Route::get('/dashboard', function () {
     return view('dashboard');
