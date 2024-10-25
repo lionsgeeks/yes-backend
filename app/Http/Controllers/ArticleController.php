@@ -99,6 +99,7 @@ class ArticleController extends Controller
             'tags.ar' => 'required|string',
         ]);
 
+        // TODO delete image 
         $theImg = $request->image;
         if ($theImg) {
             $imageName = time() .  $theImg->getClientOriginalName();

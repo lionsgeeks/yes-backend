@@ -70,8 +70,9 @@
                         <button class="bg-black rounded-sm px-3 py-2 border text-white font-medium">Create New
                             Article</button>
                     </a>
-                    <button class="text-black rounded-sm px-3 py-2 bg-white border font-medium">Send
-                        Notinfications</button>
+                    
+                    <a href="{{route('articles.index')}}"><button class="bg-black rounded-sm px-3 py-2 border text-white font-medium">Create New Article</button></a>
+                    <button class="text-black rounded-sm px-3 py-2 bg-white border font-medium">Send Notinfications</button>
                 </div>
             </div>
         </div>

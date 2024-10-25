@@ -11,6 +11,7 @@
             @foreach ($forms as $form)
                 <p>{{$form->id}}</p>
                 <p>{{$form->name_representative}}</p>
+                <p>{{$form->created_at}}</p>
             @endforeach
         </div>
     </div>
