@@ -28,7 +28,8 @@ class FormulaireController extends Controller
         $presentation = $request->file('presentation')->store('uploads', 'public');
         $proDesc = $request->file('project_description')->store('uploads', 'public');
         $fund = $request->file('funding_requirements')->store('uploads', 'public');
-
+        $projEva = $request->file('project_evaluation')->store('uploads', 'public');
+        $otherProj = $request->file('other_projects')->store('uploads', 'public');
 
         $form = Formulaire::create([
             'name_organization' => $request->name_organization,
@@ -60,8 +61,8 @@ class FormulaireController extends Controller
             'project_impact' => $request->project_impact,
             'project_duration' => $request->project_duration,
             'project_area' => $request->project_area,
-            'project_evaluation' => $request->project_evaluation,
-            'other_projects' => $request->other_projects,
+            'project_evaluation' => $projEva,
+            'other_projects' => $otherProj,
             'sources_funding' => $request->sources_funding,
             'themes_intervention' => $request->themes_intervention,
             'partners' => $request->partners,
