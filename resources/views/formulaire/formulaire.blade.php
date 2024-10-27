@@ -11,6 +11,12 @@
             @foreach ($forms as $form)
                 <p>{{$form->id}}</p>
                 <p>{{$form->name_representative}}</p>
+                <p>{{$form->created_at}}</p>
+                <p>{{$form->legal_statutes}}</p>
+                <p>{{$form->presentation}}</p>
+                <p>{{$form->internal_regulations}}</p>
+                <p>{{$form->funding_requirements}}</p>
+                <p>{{$form->project_evaluation}}</p>
             @endforeach
         </div>
     </div>

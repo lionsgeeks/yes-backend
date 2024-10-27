@@ -22,10 +22,14 @@ class FormulaireController extends Controller
      */
     public function store(Request $request)
     {
-        // create and store the file in the uploads folder 
+        // create and store the file in the uploads folder
         $legalPath = $request->file('legal_statutes')->store('uploads', 'public');
         $internalPath = $request->file('internal_regulations')->store('uploads', 'public');
-
+        $presentation = $request->file('presentation')->store('uploads', 'public');
+        $proDesc = $request->file('project_description')->store('uploads', 'public');
+        $fund = $request->file('funding_requirements')->store('uploads', 'public');
+        $projEva = $request->file('project_evaluation')->store('uploads', 'public');
+        $otherProj = $request->file('other_projects')->store('uploads', 'public');
 
         $form = Formulaire::create([
             'name_organization' => $request->name_organization,
@@ -42,23 +46,23 @@ class FormulaireController extends Controller
             'years_existence' => $request->years_existence,
             'country_registration' => $request->country_registration,
             'legal_statutes' => $legalPath,
-            'presentation' => $request->presentation,
+            'presentation' => $presentation,
             'internal_regulations' => $internalPath,
             'num_employees' => $request->num_employees,
             'num_volunteers' => $request->num_volunteers,
             'beneficiaries' => $request->beneficiaries,
             'country_intervention' => $request->country_intervention,
             'area_intervention' => $request->area_intervention,
-            'project_description' => $request->project_description,
-            'funding_requirements' => $request->funding_requirements,
+            'project_description' => $proDesc,
+            'funding_requirements' => $fund,
             'approached_funders' => $request->approached_funders,
             'neet_project_example' => $request->neet_project_example,
             'project_reach' => $request->project_reach,
             'project_impact' => $request->project_impact,
-            'project_duradtion' => $request->project_duration,
+            'project_duration' => $request->project_duration,
             'project_area' => $request->project_area,
-            'project_evaluation' => $request->project_evaluation,
-            'other_projects' => $request->other_projects,
+            'project_evaluation' => $projEva,
+            'other_projects' => $otherProj,
             'sources_funding' => $request->sources_funding,
             'themes_intervention' => $request->themes_intervention,
             'partners' => $request->partners,
