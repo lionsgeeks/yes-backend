@@ -63,16 +63,18 @@
                 </div>
             </div>
             <div class="bg-white rounded p-4 flex flex-col gap-6">
-                <h1 class="text-xl font-bold">Quick Actions</h1>    
+                <h1 class="text-xl font-bold">Quick Actions</h1>
                 <div class="flex gap-3">
                     <a href="/articles/create">
                         <button class="bg-black rounded-sm px-3 py-2 border text-white font-medium">
                             Create New Article
                         </button>
                     </a>
-                    <button class="text-black rounded-sm px-3 py-2 bg-white border font-medium">
-                        Send Notinfications
-                    </button>
+                    <a href="/users">
+                        <button class="text-black rounded-sm px-3 py-2 bg-white border font-medium">
+                            Add Admin
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
