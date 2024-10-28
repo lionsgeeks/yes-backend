@@ -42,10 +42,9 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                                 </svg>
-                                <p>{{ $article->title }}</p>
+                                <p>{{ $article->title->en }}</p>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
                 <div class="bg-white p-4 w-[50%] rounded flex flex-col gap-3">
@@ -64,15 +63,16 @@
                 </div>
             </div>
             <div class="bg-white rounded p-4 flex flex-col gap-6">
-                <h1 class="text-xl font-bold">Quick Actions</h1>
+                <h1 class="text-xl font-bold">Quick Actions</h1>    
                 <div class="flex gap-3">
                     <a href="/articles/create">
-                        <button class="bg-black rounded-sm px-3 py-2 border text-white font-medium">Create New
-                            Article</button>
+                        <button class="bg-black rounded-sm px-3 py-2 border text-white font-medium">
+                            Create New Article
+                        </button>
                     </a>
-                    
-                    <a href="{{route('articles.index')}}"><button class="bg-black rounded-sm px-3 py-2 border text-white font-medium">Create New Article</button></a>
-                    <button class="text-black rounded-sm px-3 py-2 bg-white border font-medium">Send Notinfications</button>
+                    <button class="text-black rounded-sm px-3 py-2 bg-white border font-medium">
+                        Send Notinfications
+                    </button>
                 </div>
             </div>
         </div>

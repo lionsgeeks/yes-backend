@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -23,6 +25,8 @@ class MessageController extends Controller
             "phone" => $request->phone,
             "message" => $request->message,
         ]);
+        $emailOrg = 'contact@youthempowermentsummit.africa';
+        Mail::to($emailOrg)->send(new ContactMail($request->fullname, $request->email, $request->phone,  $request->message));
         return response()->json([
             "message" => "Message sent succefully"
         ]);
