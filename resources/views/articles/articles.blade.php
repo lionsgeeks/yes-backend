@@ -19,37 +19,38 @@
                     </div>
 
                     <br><br>
-                    <h1 class="text-xl font-semibold">This is where your articles should be :</h1>
 
                     {{-- All your articles --}}
                     <div>
                         <table class="w-full">
-                            <thead>
-                                <th>image</th>
-                                <th>title</th>
-                                <th>creation date</th>
-                                <th>Edit Article</th>
-                                <th>Delete Article</th>
+                            <thead class="">
+                                <th class="py-3 textst">image</th>
+                                <th class="py-3 textst">title</th>
+                                <th class="py-3 textst">creation date</th>
+                                <th class="py-3 textst">Edit Article</th>
+                                <th class="py-3 textst">Delete Article</th>
                             </thead>
 
                             <tbody class="w-full">
                                 @foreach ($articles as $article)
-                                    <tr class="w-full text-center">
-                                        <td class="flex items-center justify-center">
-                                            <img class="w-[100px] object-cover" src="{{ asset('storage/images/' . $article->image) }}"
+                                    <tr class="w-full text-center ">
+                                        <td class="flex py-2 items-center justify-center">
+                                            <img class="w-[100px] rounded-lg object-cover" src="{{ asset('storage/images/' . $article->image) }}"
                                                 alt="">
                                         </td>
-                                        <td>
-                                            {{ $article->title->en }}
+                                        <td class="py-2">
+                                            <div class="truncate px-3 w-[30vw] ">
+                                                {{ $article->title->en }}
+                                            </div>
                                         </td>
                                         <td>
                                             {{ $article->created_at }}
                                         </td>
-                                        <td>
+                                        <td class="py-2">
                                             <form action="{{ route('articles.edit', $article) }}" method="POST">
                                                 @csrf
                                                 @method('GET')
-                                                <button class="text-green-500">
+                                                <button class="text-beta">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                         class="size-6">
