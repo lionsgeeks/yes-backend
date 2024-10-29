@@ -351,8 +351,6 @@
                         </tr>
                     @endforeach
                 </table>
-
-                {{-- TODO: check the condition of approached funders and partners --}}
             </div>
         </div>
     </div>
