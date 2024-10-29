@@ -65,6 +65,7 @@ class FormulaireController extends Controller
             'other_projects' => $otherProj,
             'sources_funding' => $request->sources_funding,
             'themes_intervention' => $request->themes_intervention,
+            'intervention_themes' => $request->intervention_themes,
             'partners' => $request->partners,
             'project_financing' => $request->project_financing
         ]);

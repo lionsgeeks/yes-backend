@@ -99,9 +99,9 @@ class ArticleController extends Controller
             'tags.ar' => 'required|string',
         ]);
 
-        // TODO delete image 
         $theImg = $request->image;
         if ($theImg) {
+            Storage::disk('public')->delete('images/' . $article->image);
             $imageName = time() .  $theImg->getClientOriginalName();
             $theImg->storeAs('images', $imageName, 'public');
         }

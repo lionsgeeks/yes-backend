@@ -46,6 +46,7 @@ return new class extends Migration
             $table->text('other_projects')->nullable();
             $table->text('sources_funding')->nullable();
             $table->text('themes_intervention')->nullable();
+            $table->text('intervention_themes')->nullable();
             $table->text('partners')->nullable();
             $table->text('project_financing')->nullable();
             $table->timestamps();
