@@ -40,6 +40,7 @@ class Formulaire extends Model
         'other_projects',
         'sources_funding',
         'themes_intervention',
+        'intervention_themes',
         'partners',
         'project_financing'
     ];

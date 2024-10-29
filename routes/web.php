@@ -17,12 +17,13 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
+    Route::resource('forms', FormulaireController::class);
     Route::get('/messages', [MesageController::class, 'index'])->name('message.index');
     Route::put('/messages/markread/{message}', [MesageController::class, 'update'])->name('message.markread');
     Route::delete('/messages/delete/{message}', [MesageController::class, 'destroy'])->name('message.delete');
-    Route::get('/users', [AdminController::class,'index'])->name('admins.index');
-    Route::post('/users/create', [AdminController::class,'store'])->name('admins.store');
-    
+    Route::get('/users', [AdminController::class, 'index'])->name('admins.index');
+    Route::post('/users/create', [AdminController::class, 'store'])->name('admins.store');
+
     Route::get('/formulaire', [FormulaireController::class, 'index'])->name('form.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

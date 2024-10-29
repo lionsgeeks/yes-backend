@@ -35,9 +35,9 @@ class FormulaireController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Formulaire $formulaire)
+    public function show(Formulaire $form)
     {
-        //
+        return view('formulaire.partials.formulaire_show', compact('form'));
     }
 
     /**
