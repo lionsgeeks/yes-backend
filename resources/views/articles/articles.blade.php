@@ -19,7 +19,10 @@
                     </div>
 
                     <br><br>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                     {{-- All your articles --}}
                     <div>
                         <table class="w-full">

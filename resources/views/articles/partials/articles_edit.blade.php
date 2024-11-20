@@ -32,10 +32,10 @@
                                             <label for="title_en" class="w-full font-bolder text-base">Article
                                                 Title: </label>
                                             <input class="rounded w-full" type="text" id="title_en"
-                                                placeholder="Title..." value="{{ $article->title->en }}" name="title[en]"
-                                                required>
+                                                placeholder="Title..." value="{{ $article->title->en }}"
+                                                name="title[en]" required>
 
-                                            </div>
+                                        </div>
 
                                         <div class="flex flex-col gap-[0.5rem]">
                                             <label for="description_en" class="w-full font-bolder text-base">Article
@@ -44,7 +44,7 @@
                                                 name="description[en]" rows="5">{{ $article->description->en }}</textarea> --}}
 
                                             <div id="quill-editor_en" class="mb-3" style="height: 300px;"></div>
-                                            <textarea rows="3" class="w-full hidden" name="description[en]" id="description_en">{{$article->description->en}}</textarea>
+                                            <textarea rows="3" class="w-full hidden" name="description[en]" id="description_en">{{ $article->description->en }}</textarea>
                                         </div>
 
 
@@ -80,7 +80,8 @@
                                             <label for="tags_ar" class="w-full font-bolder text-base text-end">:علامات
                                                 المقال</label>
                                             <input type="text" class="rounded w-full text-end" id="tags_ar"
-                                                placeholder="...العلامات" value="{{ $article->tags->ar }}" name="tags[ar]">
+                                                placeholder="...العلامات" value="{{ $article->tags->ar }}"
+                                                name="tags[ar]">
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +129,9 @@
                             [{
                                 header: [1, 2, 3, false]
                             }],
-                            ['bold', 'underline', 'code', 'strike', { align: ['justify','center', 'right'] }],
+                            ['bold', 'underline', 'code', 'strike', {
+                                align: ['justify', 'center', 'right']
+                            }],
 
                             ['link', {
                                 list: 'ordered'
@@ -169,7 +172,9 @@
                             [{
                                 header: [1, 2, 3, false]
                             }],
-                            ['bold', 'underline', 'code', 'strike', 'blockquote'],
+                            ['bold', 'underline', 'code', 'strike', {
+                                align: ['justify', 'center', 'right']
+                            }],
 
                             ['link', {
                                 list: 'ordered'

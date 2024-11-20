@@ -28,8 +28,18 @@ class FormulaireController extends Controller
         $presentation = $request->file('presentation')->store('uploads', 'public');
         $proDesc = $request->file('project_description')->store('uploads', 'public');
         $fund = $request->file('funding_requirements')->store('uploads', 'public');
-        $projEva = $request->file('project_evaluation')->store('uploads', 'public');
-        $otherProj = $request->file('other_projects')->store('uploads', 'public');
+
+        if ($request->file('project_evaluation')) {
+            $projEva = $request->file('project_evaluation')->store('uploads', 'public');
+        } else {
+            $projEva = null;
+        }
+
+        if ($request->file('other_projects')) {
+            $otherProj = $request->file('other_projects')->store('uploads', 'public');
+        } else {
+            $otherProj = null;
+        }
 
         $form = Formulaire::create([
             'name_organization' => $request->name_organization,
@@ -79,7 +89,6 @@ class FormulaireController extends Controller
                 'message' => "failed miserably and horribly",
             ], 69);
         }
-
     }
 
     /**

@@ -52,7 +52,7 @@ class ArticleController extends Controller
             $article = Article::create([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
-                'tags' => $request->tags,
+                'tags' => $request->input('tags'),
                 'image' => $imageName
             ]);
 
