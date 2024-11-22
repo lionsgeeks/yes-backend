@@ -18,7 +18,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    # increase size limit to 100MB
-    LimitRequestBody 104857600
 </IfModule>
