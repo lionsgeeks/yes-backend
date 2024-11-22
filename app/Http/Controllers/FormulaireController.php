@@ -62,13 +62,21 @@ class FormulaireController extends Controller
      */
     public function destroy(Formulaire $form)
     {
-        Storage::disk('public')->delete($form->presentation);
-        Storage::disk('public')->delete($form->legal_statutes);
-        Storage::disk('public')->delete($form->internal_regulations);
-        Storage::disk('public')->delete($form->project_description);
-        Storage::disk('public')->delete($form->funding_requirements);
-        Storage::disk('public')->delete($form->project_evaluation);
-        Storage::disk('public')->delete($form->other_projects);
+        $files = [
+            $form->presentation,
+            $form->legal_statutes,
+            $form->internal_regulations,
+            $form->project_description,
+            $form->funding_requirements,
+            $form->project_evaluation,
+            $form->other_projects
+        ];
+
+        foreach ($files as $file) {
+            if ($file) {
+                Storage::disk('public')->delete($file);
+            }
+        }
 
         $form->delete();
         return back()->with('success', "The Form and it's Files were deleted Successfully!!");
