@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\FormApproved;
 use App\Models\Formulaire;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FormulaireController extends Controller
 {
@@ -80,6 +82,7 @@ class FormulaireController extends Controller
             'project_financing' => $request->project_financing
         ]);
 
+        Mail::to($request->email_representative)->send(new FormApproved($request->name_organization,));
         if ($form instanceof Model) {
             return response()->json([
                 'message' => "success",
