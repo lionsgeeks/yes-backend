@@ -262,7 +262,7 @@
             </div> --}}
 
             <div class="bg-white overflow-hidden shadow-sm text-gray-900 sm:rounded-lg p-6">
-                <table>
+                <table class="capitalize">
                     <tr class="bg-alpha text-white">
                         <th class="border border-white p-3 w-[35vw]">Questions</th>
                         <th class="border border-white p-3">Response type</th>
@@ -345,10 +345,10 @@
                                         </div>
                                     @endif
                                 @elseif ($field == 'themes_intervention' || $field == 'intervention_themes' || $field == 'sources_funding')
-                                    <span
-                                        class="capitalize">{{ str_replace('-', ' ', implode(', ', explode(',', $form->$field))) }}</span>
+                                    <span>{{ str_replace('-', ' ', implode(', ', explode(',', $form->$field))) }}</span>
                                 @else
-                                    {{ $form->$field }}
+                                    <span>{{ $form->$field }}</span>
+                                    <span>{{ str_replace('_', ' ', $form->$field) }}</span>
                                 @endif
                             </td>
                         </tr>

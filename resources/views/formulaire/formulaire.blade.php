@@ -8,7 +8,15 @@
     <div class="py-12 ">
         <div class="max-w-7xl mx-auto flex flex-col gap-5 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900">
-                <table class="w-full text-center">
+                <div class="flex items-center justify-end mb-4">
+                    <form action="{{route('form.export')}}" method="post">
+                        @csrf
+                        <button class="bg-black text-white px-4 py-1 rounded">
+                            Export Excel
+                        </button>
+                    </form>
+                </div>
+                <table class="w-full text-center capitalize">
                     <thead>
                         <th>Organization</th>
                         <th>Representative</th>
@@ -21,7 +29,7 @@
                             <tr class="h-[7vh]">
                                 <td>{{ $form->name_organization }}</td>
                                 <td>{{ $form->name_representative }}</td>
-                                <td>{{ $form->country_registration }}</td>
+                                <td>{{ str_replace('_',' ', $form->country_registration) }}</td>
                                 <td>
                                     <form action="{{ route('forms.show', $form) }}" method="POST">
                                         @csrf
