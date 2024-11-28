@@ -9,7 +9,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->to('https://youthempowermentsummit.africa/');
+    if (request()->redirect == "true") {
+        return redirect()->to('https://youthempowermentsummit.africa/');
+    }else {
+        return view("welcome");
+    }
 });
 
 

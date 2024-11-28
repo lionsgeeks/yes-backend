@@ -35,7 +35,7 @@
                                 @foreach ($articles as $article)
                                     <tr class="w-full text-center ">
                                         <td class="flex py-2 items-center justify-center">
-                                            <img class="w-[100px] rounded-lg object-cover" src="{{ asset('storage/images/' . $article->image) }}"
+                                            <img class="w-[100px] h-[5rem] rounded-lg object-cover" src="{{ asset('storage/images/' . $article->image) }}"
                                                 alt="">
                                         </td>
                                         <td class="py-2">
