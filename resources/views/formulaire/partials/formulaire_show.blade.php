@@ -345,10 +345,9 @@
                                         </div>
                                     @endif
                                 @elseif ($field == 'themes_intervention' || $field == 'intervention_themes' || $field == 'sources_funding')
-                                    <span>{{ str_replace('-', ' ', implode(', ', explode(',', $form->$field))) }}</span>
+                                    <span>{{ str_replace('-', ' ', implode(', ', explode(',', $form->$field))) }} </span>
                                 @else
-                                    <span>{{ $form->$field }}</span>
-                                    <span>{{ str_replace('_', ' ', $form->$field) }}</span>
+                                    <span>{{ str_replace('-', ' ', str_replace('_', ' ', $form->$field)) }} </span>
                                 @endif
                             </td>
                         </tr>
