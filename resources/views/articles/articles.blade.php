@@ -13,7 +13,7 @@
                     <div class="w-full flex justify-end">
                         <a href="{{route('articles.create')}}">
                             <button class="bg-black text-white rounded px-4 py-2">
-                                <span class="text-lg font-bold">+</span> Write a New Article
+                                <span class="text-lg font-bold">+</span> Write a New Article 
                             </button>
                         </a>
                     </div>
