@@ -24,7 +24,7 @@
         {{-- @include('layouts.navigation') --}}
 
         <!-- Page Heading -->
-        @include('layouts.side-bar')
+        {{-- @include('layouts.side-bar') --}}
         <div class="flex flex-col w-full overflow-y-auto h-screen">
             @isset($header)
                 <header class="bg-white shadow flex justify-between items-center w-full ">
