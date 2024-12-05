@@ -7,3 +7,22 @@
 display: none;
 }
 
+@media screen and (max-width: 428px) {
+    .myMenu{
+        display: flex;
+    }
+    .name{
+        display: none;
+    }
+   #sidebar{
+    display: none;
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    top: 7vh;
+    left: 10px;
+    border-radius: 10px;
+   }
+
+   
+  }

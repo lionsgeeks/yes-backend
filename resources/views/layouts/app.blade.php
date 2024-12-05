@@ -16,6 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script>
+    <script type="text/javascript" src="{{ asset('js/responsive-nav.js') }}" defer></script>
+
 
 </head>
 
@@ -25,64 +27,90 @@
 
         <!-- Page Heading -->
         @include('layouts.side-bar')
-        <div class="flex flex-col w-full overflow-y-auto h-screen">
+        <div class="flex flex-col w-full overflow-y-auto h-screen  sm:mb-0 mb-10">
             @isset($header)
-                <header class="bg-white shadow flex justify-between items-center w-full ">
-                    <div class="py-6 w-[95%] px-4 sm:px-6 lg:px-8">
+                <header id="navbar" class=" shadow flex justify-between items-center w-full bg-white ">
+                    <div id="menu-bg"  class="myMenu hidden flex-col justify-center ">
+                        <div class="relative   sm:max-w-xl ">
+                            <nav x-data="{ open: false }">
+                                <button class="w-[40px] h-[40px] px-2  relative focus:outline-none rounded"
+                                    @click="open = !open">
+                                    <div 
+                                        class="block w-5  absolute ">
+                                        <span
+                                            class="block absolute h-0.5 w-7 text-black bg-current transform transition duration-500 ease-in-out"
+                                            :class="{ 'rotate-45': open, ' -translate-y-1.5': !open }"></span>
+                                        <span
+                                            class="block absolute  h-0.5 w-5 text-black bg-current   transform transition duration-500 ease-in-out"
+                                            :class="{ 'opacity-0': open }"></span>
+                                        <span
+                                            class="block absolute  h-0.5 w-7 text-black bg-current transform  transition duration-500 ease-in-out"
+                                            :class="{ '-rotate-45 ': open, ' translate-y-1.5': !open }"></span>
+                                    </div>
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="py-4 w-[95%] px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
-                    <div class="hidden mr-4 sm:flex {{ isset($header) ? '' : 'sm:ml-auto' }}">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center  text-sm leading-4 font-medium  focus:outline-none transition ease-in-out duration-150 ms-1 bg-gray-100 rounded-full p-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                    </svg>
-                                </button>
-                            </x-slot>
-                            <x-slot name="content">
-                                <div class="px-3 pt-2 pb-1 border-gray-200 border-b-2">
-                                    <p class="font-bold m-0 capitalize">{{ Auth::user()->name }}</p>
-                                    <p class="m-0">
-                                        {{ Auth::user()->email }}
-                                    </p>
-                                </div>
-                                <x-dropdown-link :href="route('profile.edit')" class="no-underline">
-                                    <div class="flex items-center gap-2">
+                    <div class="flex items-center ">
+                        <div class="px-3 pt-2 pb-1 name">
+                            <p class="font-bold m-0 capitalize">{{ Auth::user()->name }}</p>
+                        </div>
+                        <div class=" mr-4 sm:flex {{ isset($header) ? '' : 'sm:ml-auto' }}">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <button
+                                        class="inline-flex items-center  text-sm leading-4 font-medium  focus:outline-none transition ease-in-out duration-150 ms-1 bg-gray-100 rounded-full p-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                         </svg>
-                                        <p class="m-0 font-semibold">
-                                            {{ __('Profile') }}
+                                    </button>
+                                </x-slot>
+                                <x-slot name="content">
+                                    {{-- <div class="px-3 pt-2 pb-1 border-gray-200 border-b-2 ">
+                                        <p class="font-bold m-0 capitalize">{{ Auth::user()->name }}</p>
+                                        <p class="m-0">
+                                            {{ Auth::user()->email }}
                                         </p>
-                                    </div>
-                                </x-dropdown-link>
-                                <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <x-dropdown-link :href="route('logout')" class="no-underline"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
+                                    </div> --}}
+                                    <x-dropdown-link :href="route('profile.edit')" class="no-underline">
                                         <div class="flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="size-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                             </svg>
                                             <p class="m-0 font-semibold">
-                                                {{ __('Log Out') }}
+                                                {{ __('Profile') }}
                                             </p>
                                         </div>
                                     </x-dropdown-link>
-                                </form>
-                            </x-slot>
-                        </x-dropdown>
-                        <!-- Settings Dropdown -->
+                                    <!-- Authentication -->
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('logout')" class="no-underline"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                            <div class="flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                                                </svg>
+                                                <p class="m-0 font-semibold">
+                                                    {{ __('Log Out') }}
+                                                </p>
+                                            </div>
+                                        </x-dropdown-link>
+                                    </form>
+                                </x-slot>
+                            </x-dropdown>
+                            <!-- Settings Dropdown -->
+                        </div>
                     </div>
                 </header>
             @endisset
@@ -94,5 +122,7 @@
         </div>
     </div>
 </body>
+
+
 
 </html>
