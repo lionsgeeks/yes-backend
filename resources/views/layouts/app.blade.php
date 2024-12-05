@@ -16,6 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script>
+    <script type="text/javascript" src="{{ asset('js/responsive-nav.js') }}" defer></script>
+
 
 </head>
 
@@ -25,17 +27,38 @@
 
         <!-- Page Heading -->
         @include('layouts.side-bar')
-        <div class="flex flex-col w-full overflow-y-auto h-screen ">
+        <div class="flex flex-col w-full overflow-y-auto h-screen  sm:mb-0 mb-10">
             @isset($header)
-                <header class="bg-white shadow flex justify-between items-center w-full ">
+                <header id="navbar" class=" shadow flex justify-between items-center w-full ">
+                    <div id="menu-bg"  class="myMenu hidden flex-col justify-center ">
+                        <div class="relative   sm:max-w-xl ">
+                            <nav x-data="{ open: false }">
+                                <button class="w-[40px] h-[40px] px-2  relative focus:outline-none rounded"
+                                    @click="open = !open">
+                                    <div 
+                                        class="block w-5  absolute ">
+                                        <span
+                                            class="block absolute h-0.5 w-7 text-black bg-current transform transition duration-500 ease-in-out"
+                                            :class="{ 'rotate-45': open, ' -translate-y-1.5': !open }"></span>
+                                        <span
+                                            class="block absolute  h-0.5 w-5 text-black bg-current   transform transition duration-500 ease-in-out"
+                                            :class="{ 'opacity-0': open }"></span>
+                                        <span
+                                            class="block absolute  h-0.5 w-7 text-black bg-current transform  transition duration-500 ease-in-out"
+                                            :class="{ '-rotate-45 ': open, ' translate-y-1.5': !open }"></span>
+                                    </div>
+                                </button>
+                            </nav>
+                        </div>
+                    </div>
                     <div class="py-4 w-[95%] px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                     <div class="flex items-center ">
-                        <div class="px-3 pt-2 pb-1 ">
+                        <div class="px-3 pt-2 pb-1 name">
                             <p class="font-bold m-0 capitalize">{{ Auth::user()->name }}</p>
                         </div>
-                        <div class="hidden mr-4 sm:flex {{ isset($header) ? '' : 'sm:ml-auto' }}">
+                        <div class=" mr-4 sm:flex {{ isset($header) ? '' : 'sm:ml-auto' }}">
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                     <button
@@ -99,5 +122,7 @@
         </div>
     </div>
 </body>
+
+
 
 </html>

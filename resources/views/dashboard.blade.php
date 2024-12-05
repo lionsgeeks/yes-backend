@@ -8,15 +8,15 @@
 
 
 
-    <div class="py-8 h-[92.5vh]  overflow-y-hidden">
+    <div class="sm:py-8 sm:h-[92.5vh]  sm:overflow-y-hidden  sm:px-0 p-4">
         <div class="max-w-7xl mx-auto flex flex-col gap-x-5 gap-y-10 sm:px-6 lg:px-8">
-            <div class="">
-                <h1 class="capitalize text-[46px] font-bold">Good Day, {{ Auth::user()->name }}</h1>
-                <p>We are collecting new emails, and recent articles for you</p>
+            <div class="sm:flex-none sm:items-start flex justify-center flex-col items-center sm:mt-0 mt-5">
+                <h1 class="capitalize sm:text-[46px] text-[30px]  font-bold">Good Day, {{ Auth::user()->name }}</h1>
+                <p class="sm:w-full sm:text-start w-[70%]  text-center">We are collecting new emails, and recent articles for you</p>
 
             </div>
 
-            <div class="w-full flex gap-x-10">
+            <div class="w-full flex sm:gap-x-10 sm:flex-row flex-col-reverse sm:gap-y-0 gap-y-10  ">
                 <div class="flex flex-col gap-y-10">
                     <div class="w-full flex flex-col gap-y-3">
                         <div class="flex items-center gap-x-2">
@@ -34,7 +34,7 @@
 
                             </div>
                         </div>
-                        <div class="w-[55vw] bg-white shadow-md rounded-xl p-2 flex flex-col gap-y-2">
+                        <div class="sm:w-[55vw] w-full bg-white shadow-md rounded-xl p-2 flex flex-col gap-y-2">
                             @foreach ($latestmessages as $key => $message)
                                 <div x-on:click='id = {{ $key }}'
                                     class="flex items-center gap-x-4 p-2 border-b-[1.6px]">
@@ -55,7 +55,7 @@
                                     d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                             </svg>
                             <div class="flex justify-between items-center w-full">
-                                <h1 class="text-xl font-bold">Recent Messages</h1>
+                                <h1 class="text-xl font-bold">New Articles</h1>
 
 
                                 <a href="{{ route('articles.index') }}" class="text-[#b09417] text-[18px] cursor-pointer underline">
@@ -63,14 +63,14 @@
 
                             </div>
                         </div>
-                        <div class="flex flex-wrap gap-x-10 gap-y-4">
+                        <div class="flex sm:flex-wrap sm:flex-row flex-col gap-x-10 gap-y-4 ">
                             @foreach ($latestarticles as $article)
                                 <div
-                                    class="w-[26vw] h-[25vh] bg-white shadow-xl rounded-xl flex flex-col gap-y-2 border-2">
+                                    class="sm:w-[26vw] w-full h-[25vh]  bg-white shadow-xl rounded-xl flex flex-col gap-y-2 border-2">
                                     <img src="{{ asset('storage/images/' . $article->image) }}" alt=""
-                                        class="h-[60%] w-full object-cover rounded-ss-xl rounded-se-md">
+                                        class="sm:h-[60%] h-[70%] w-full object-cover rounded-ss-xl rounded-se-md">
                                     <h1
-                                        class="text-md px-2  font-bold  h-[6vh] overflow-hidden whitespace-normal break-words">
+                                        class="text-md px-2 sm:mb-0 mb-2  font-bold  sm:h-[6vh]  overflow-hidden whitespace-normal break-words">
                                         {{ $article->title->en }}</h1>
 
                                 </div>
@@ -80,7 +80,7 @@
 
                     </div>
                 </div>
-                <div class="w-[43%] h-[60vh] flex flex-col gap-y-10">
+                <div class="sm:w-[43%] w-full sm:h-[60vh] flex flex-col gap-y-10  ">
                     <div class="flex flex-col gap-y-4">
                         <div class="flex items-center gap-x-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#b09417"

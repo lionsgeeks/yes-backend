@@ -1,4 +1,4 @@
-<div class="w-[16vw]  h-screen bg-alpha flex flex-col py-5 justify-">
+<div id="sidebar" class="w-[16vw]  h-screen bg-alpha flex flex-col py-5 justify-">
     <div class="flex flex-col w-full">
         <div class="px-[1.5rem]">
             <a href="">
