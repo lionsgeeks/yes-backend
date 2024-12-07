@@ -5,11 +5,37 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 ">
+    <div class="py-12" x-data="{
+        forms: {{ json_encode($forms) }},
+        searchQuery: '',
+        {{-- search function: return true if any of the conditions are met --}}
+        matchesSearch(form) {
+            const query = this.searchQuery.toLowerCase();
+            return form.name_organization.toLowerCase().includes(query) ||
+                form.name_representative.toLowerCase().includes(query) ||
+                form.email_representative.toLowerCase().includes(query) ||
+                form.country_registration.toLowerCase().includes(query);
+        },
+
+    }">
         <div class="max-w-7xl mx-auto hidden flex-col gap-5 sm:px-6 lg:px-8 md:flex">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900">
-                <div class="flex items-center justify-end mb-4">
-                    <form action="{{route('form.export')}}" method="post">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                            <path fill-rule="evenodd"
+                                d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        {{-- change the variable to whatever is in the input --}}
+                        <input x-model="searchQuery" placeholder="Organization, Name, Email or Country" type="search" name="search"
+                            id="search"
+                            class="border-none bg-transparent w-full outline-none focus:border-none focus:ring-0 focus:outline-none text-sm">
+
+                    </div>
+
+                    <form action="{{ route('form.export') }}" method="post">
                         @csrf
                         <button class="bg-black text-white px-4 py-1 rounded">
                             Export Excel
@@ -25,23 +51,23 @@
                         <th>Delete Form</th>
                     </thead>
                     <tbody>
-                        @foreach ($forms as $form)
-                            <tr class="h-[7vh]">
-                                <td>{{ $form->name_organization }}</td>
-                                <td>{{ $form->name_representative }}</td>
-                                <td>{{ str_replace('_',' ', $form->country_registration) }}</td>
+
+                        <template x-for="form in forms" :key="form.id">
+                            <tr class="h-[7vh]" x-show="matchesSearch(form)">
                                 <td>
-                                    <form action="{{ route('forms.show', $form) }}" method="POST">
+                                    <span x-text="form.name_organization"></span>
+                                </td>
+                                <td>
+                                    <span x-text="form.name_representative"></span>
+                                </td>
+                                <td>
+                                    <span x-text="form.country_registration.replace('_', ' ')"></span>
+                                </td>
+                                <td>
+                                    <form :action="'{{ route('forms.show', '') }}/' + form.id" method="POST">
                                         @csrf
                                         @method('GET')
                                         <button class="text-green-500">
-                                            {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                            </svg> --}}
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -52,7 +78,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('forms.destroy', $form) }}" method="POST">
+                                    <form :action="'{{ route('forms.destroy', '') }}/' + form.id" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="text-red-500">
@@ -64,10 +90,8 @@
                                         </button>
                                     </form>
                                 </td>
-
-
                             </tr>
-                        @endforeach
+                        </template>
                     </tbody>
                 </table>
             </div>
@@ -128,6 +152,6 @@
                         </div>
                     @endforeach
                 </div>
-            </div>  
+            </div>
     </div>
 </x-app-layout>
