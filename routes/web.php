@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MesageController;
 use App\Http\Controllers\FormulaireController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::resource('forms', FormulaireController::class);
+    Route::resource("participants",ParticipantController::class);
+    
     Route::get('/messages', [MesageController::class, 'index'])->name('message.index');
     Route::put('/messages/markread/{message}', [MesageController::class, 'update'])->name('message.markread');
     Route::delete('/messages/delete/{message}', [MesageController::class, 'destroy'])->name('message.delete');
