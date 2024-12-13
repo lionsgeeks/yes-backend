@@ -5,22 +5,22 @@
         </h2>
     </x-slot>
     <div class="py-12 lg:px-8 px-4">
-        <div  class="flex bg-white w-[100%] min-h-[72vh] rounded-lg ">
+        <div  class="flex bg-white overflow-hidden w-[100%] min-h-[72vh] rounded-lg ">
             <div x-data="{participants: {{ json_encode($participants) }}}" class="w-full p-6">
                 <table class="w-full ">
                     <thead class=" ">
-                        <th>Name</th>
-                        <th>Organisation</th>
-                        <th>Country</th>
-                        <th>More details</th>
+                        <th class="">Name</th>
+                        <th class="max-[430px]:hidden">Organisation</th>
+                        <th class="max-[430px]:hidden">Country</th>
+                        <th class="">More details</th>
                     </thead>
                     <tbody class="">
                         <template x-for="participant in participants" :key="participant.id">
                             <tr class="text-black text-center h-[3rem]">
-                                <td class="w-[20%] text-nowrap " x-text="participant.civility +'. '+ participant.name" ></td>
-                                <td class="w-[20%] text-nowrap " x-text="participant.organisation" ></td>
-                                <td class="w-[20%] text-nowrap " x-text="participant.country" ></td>
-                                <td class="w-[20%] text-nowrap ">
+                                <td class="lg:w-[20%] w-[70%] text-nowrap " x-text="participant.civility +'. '+ participant.name" ></td>
+                                <td class="w-[20%] text-nowrap max-[430px]:hidden " x-text="participant.organisation" ></td>
+                                <td class="lg:w-[20%] w-[calc(90%/2)] text-nowrap max-[430px]:hidden " x-text="participant.country" ></td>
+                                <td class="lg:w-[20%] w-[30%] text-nowrap ">
                                     <form :action="'{{ route("participants.show","") }}/' + participant.id" method="POST">
                                         @csrf
                                         @method('GET')

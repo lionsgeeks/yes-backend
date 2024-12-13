@@ -62,6 +62,6 @@ class ParticipantController extends Controller
     public function destroy(Participant $participant)
     {
         $participant->delete();
-        return redirect("/participants");
+        return redirect("/participants")->with('success', "The Participant was deleted Successfully!!");;
     }
 }
