@@ -41,7 +41,17 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M15 13.5H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                 </svg>
-                Form
+                NGO
+            </a>
+
+            <a href='{{ route('participants.index') }}'
+                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-[#f5e7c6] rounded-xl px-[1rem] {{ request()->routeIs('participants.index') ? 'text-alpha bg-[#f5e7c6]' : 'text-gray-100' }}'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 13.5H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                </svg>
+                Participants
             </a>
             <a href='{{ route('admins.index') }}'
                 class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-[#f5e7c6] rounded-xl px-[1rem] {{ request()->routeIs('admins.index') ? 'text-alpha bg-[#f5e7c6]' : 'text-gray-100' }}'>
@@ -52,15 +62,7 @@
                 </svg>
                 Users
             </a>
-            <a href='{{ route('participants.index') }}'
-                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-[#f5e7c6] rounded-xl px-[1rem] {{ request()->routeIs('participants.index') ? 'text-alpha bg-[#f5e7c6]' : 'text-gray-100' }}'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                Participants
-            </a>
+
         </div>
     </div>
 </div>
