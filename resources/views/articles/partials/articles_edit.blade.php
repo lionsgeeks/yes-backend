@@ -109,9 +109,11 @@
 
                             </div>
                         </div>
-                        <button type="submit" class="bg-green-600 rounded px-5 py-2 text-white w-full">
-                            Update Article
-                        </button>
+                        <div class="flex items-center justify-center">
+                            <button type="submit" class="bg-alpha rounded px-5 py-2 text-white w-[97%]">
+                                Update Article
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -6,6 +6,8 @@ use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class ArticleController extends Controller
 {
@@ -45,17 +47,29 @@ class ArticleController extends Controller
         ]);
 
         $image = $request->file('image');
+        $size_in_mb = ($image->getSize() / 1024) / 1024;
+        if ($size_in_mb < 5) {
+            $quality = 70;
+        } elseif ($size_in_mb < 10) {
+            $quality = 50;
+        } else {
+            $quality = 20;
+        }
 
         if ($image) {
-            $imageName = time() .  $image->getClientOriginalName();
-            $image->storeAs('images', $imageName, 'public');
+            $imageName = time() .  ".webp";
+            $path = public_path('storage/images') . "/" . $imageName;
+            $manager = new ImageManager(new Driver());
+            $manager->read($image)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+
+
+
             $article = Article::create([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
                 'tags' => $request->input('tags'),
                 'image' => $imageName
             ]);
-
         }
 
         if ($article instanceof Model) {
@@ -63,7 +77,6 @@ class ArticleController extends Controller
         } else {
             return redirect()->route('articles.index')->with('error', 'Something Went Wrong. Try Again.');
         }
-
     }
 
     /**
@@ -99,22 +112,33 @@ class ArticleController extends Controller
             'tags.ar' => 'required|string',
         ]);
 
-        $theImg = $request->image;
-        if ($theImg) {
+        $image = $request->image;
+        $size_in_mb = ($image->getSize() / 1024) / 1024;
+        if ($size_in_mb < 5) {
+            $quality = 70;
+        } elseif ($size_in_mb < 10) {
+            $quality = 50;
+        } else {
+            $quality = 20;
+        }
+
+        if ($image) {
             Storage::disk('public')->delete('images/' . $article->image);
-            $imageName = time() .  $theImg->getClientOriginalName();
-            $theImg->storeAs('images', $imageName, 'public');
+            $imageName = time() .  $image->getClientOriginalName();
+            $path = public_path('storage/images') . "/" . $imageName;
+            $manager = new ImageManager(new Driver());
+            $manager->read($image)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+
         }
 
         $article->update([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'tags' => $request->input('tags'),
-            'image' => $theImg ? $imageName : $article->image,
+            'image' => $image ? $imageName : $article->image,
         ]);
 
-        return back()->with('success', 'Article Updated Successfully!!');
-
+        return redirect()->route('articles.index')->with('success', 'Article Updated Successfully!!');
     }
 
     /**
