@@ -9,6 +9,7 @@
             <div x-data="{participants: {{ json_encode($participants) }}}" class="w-full p-6">
                 <table class="w-full ">
                     <thead class=" ">
+                        <th>Logo</th>
                         <th class="">Name</th>
                         <th class="max-[430px]:hidden">Organisation</th>
                         <th class="max-[430px]:hidden">Country</th>
@@ -17,6 +18,9 @@
                     <tbody class="">
                         <template x-for="participant in participants" :key="participant.id">
                             <tr class="text-black text-center h-[3rem]">
+                                <td class="flex items-center justify-center">
+                                    <img x-show="participant.logo" :src="`{{ asset('storage') }}/${participant.logo}`" class="rounded w-[8vw]  object-cover" alt="">
+                                </td>
                                 <td class="lg:w-[20%] w-[70%] text-nowrap " x-text="participant.civility +'. '+ participant.name" ></td>
                                 <td class="w-[20%] text-nowrap max-[430px]:hidden " x-text="participant.organisation" ></td>
                                 <td class="lg:w-[20%] w-[calc(90%/2)] text-nowrap max-[430px]:hidden " x-text="participant.country" ></td>

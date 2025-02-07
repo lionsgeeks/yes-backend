@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("mail");
             $table->string("phone");
             $table->string("country");
+            $table->string("logo");
             $table->timestamps();
         });
     }

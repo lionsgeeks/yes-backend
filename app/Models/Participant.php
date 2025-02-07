@@ -14,6 +14,7 @@ class Participant extends Model
         "position",
         "mail",
         "phone",
-        "country"
+        "country",
+        "logo"
     ];
 }

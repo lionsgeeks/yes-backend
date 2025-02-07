@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class ParticipantsController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         request()->validate([
             "civility" => "required",
@@ -18,8 +19,12 @@ class ParticipantsController extends Controller
             "position" => "required",
             "mail" => "required",
             "phone" => "required",
-            "country" => "required"
+            "country" => "required",
+            "logo" => "required",
         ]);
+
+        // create and store the file in the uploads folder
+        $logo = $request->file('logo')->store('uploads', 'public');
 
         Participant::create([
             "name" => $request->name,
@@ -30,6 +35,7 @@ class ParticipantsController extends Controller
             "mail" => $request->mail,
             "phone" => $request->phone,
             "country" => $request->country == "other" ? $request->otherCount : $request->country,
+            "logo" => $logo
         ]);
 
         return response()->json("success");
