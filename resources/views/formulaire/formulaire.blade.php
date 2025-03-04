@@ -47,6 +47,7 @@
                         <th>Organization</th>
                         <th>Representative</th>
                         <th>Country</th>
+                        <th>Apply Date</th>
                         <th>More Details</th>
                         <th>Delete Form</th>
                     </thead>
@@ -62,6 +63,7 @@
                                 <td>
                                     <span x-text="form.country_registration.replace('_', ' ')"></span>
                                 </td>
+                                <td x-text="new Date(form.created_at).toLocaleString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(',', '')"></td>
                                 <td>
                                     <form :action="'{{ route('forms.show', '') }}/' + form.id" method="POST">
                                         @csrf

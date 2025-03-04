@@ -5,27 +5,40 @@
         </h2>
     </x-slot>
     <div class="py-12 lg:px-8 px-4">
-        <div  class="flex bg-white overflow-hidden w-[100%] min-h-[72vh] rounded-lg ">
-            <div x-data="{participants: {{ json_encode($participants) }}}" class="w-full p-6">
+        <div class="flex bg-white overflow-hidden w-[100%] min-h-[72vh] rounded-lg ">
+            <div x-data="{ participants: {{ json_encode($participants) }} }" class="w-full p-6">
                 <table class="w-full ">
                     <thead class=" ">
                         <th>Logo</th>
                         <th class="">Name</th>
                         <th class="max-[430px]:hidden">Organisation</th>
                         <th class="max-[430px]:hidden">Country</th>
+                        <th class="max-[430px]:hidden">Apply Date</th>
                         <th class="">More details</th>
                     </thead>
                     <tbody class="">
                         <template x-for="participant in participants" :key="participant.id">
                             <tr class="text-black text-center h-[3rem]">
                                 <td class="flex items-center justify-center">
-                                    <img x-show="participant.logo" :src="`{{ asset('storage') }}/${participant.logo}`" class="rounded w-[8vw]  object-cover" alt="">
+                                    <img x-show="participant.logo" :src="`{{ asset('storage') }}/${participant.logo}`"
+                                        class="rounded-lg w-[3vw] aspect-square  object-cover" alt="">
                                 </td>
-                                <td class="lg:w-[20%] w-[70%] text-nowrap " x-text="participant.civility +'. '+ participant.name" ></td>
-                                <td class="w-[20%] text-nowrap max-[430px]:hidden " x-text="participant.organisation" ></td>
-                                <td class="lg:w-[20%] w-[calc(90%/2)] text-nowrap max-[430px]:hidden " x-text="participant.country" ></td>
+                                <td class="w-[20%] text-nowrap max-[430px]:hidden"
+                                    x-text="participant.name.length > 20 ? participant.name.slice(0, 20) + '...' : participant.name">
+                                </td>
+
+                                <td class="w-[20%] text-nowrap max-[430px]:hidden"
+                                    x-text="participant.organisation.length > 20 ? participant.organisation.slice(0, 20) + '...' : participant.organisation">
+                                </td>
+
+                                <td class="lg:w-[20%] w-[calc(90%/2)] text-nowrap max-[430px]:hidden "
+                                    x-text="participant.country"></td>
+                                <td
+                                    x-text="new Date(participant.created_at).toLocaleString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(',', '')">
+                                </td>
                                 <td class="lg:w-[20%] w-[30%] text-nowrap ">
-                                    <form :action="'{{ route("participants.show","") }}/' + participant.id" method="POST">
+                                    <form :action="'{{ route('participants.show', '') }}/' + participant.id"
+                                        method="POST">
                                         @csrf
                                         @method('GET')
                                         <button class="text-green-500">
