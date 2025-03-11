@@ -19,7 +19,7 @@
     @endif
 </head>
 
-<body class="bg-gradient-to-br from-alpha to-black" >
+<body class="bg-gradient-to-br from-red-600 to-black" >
     <div class="fixed flex items-center justify-between lg:px-10 px-3 py-3 top-0 w-full">
         <a class="" href="">
             <x-application-logo color size="100" />
