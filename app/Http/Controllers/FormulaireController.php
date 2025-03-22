@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\FormulairesExport;
 use App\Models\Formulaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -33,6 +34,25 @@ class FormulaireController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function invite(Formulaire $form){
+
+        //get email
+        $response = Http::post('http://127.0.0.1:8000/api/receive-data', [
+            'email' => $form->email_representative,
+            'name' => $form->name_organization
+        ]);
+
+        $form->update([
+            'is_invited' => true
+        ]);
+
+        return back()->with('success', "Ngo has been invited to yes learning successfully!!!");
+        
+        // dd($response->body());
+        // dd($response->json());
+        // dd($form->email_representative);
     }
 
     /**
@@ -83,6 +103,8 @@ class FormulaireController extends Controller
         $form->delete();
         return back()->with('success', "The Form and it's Files were deleted Successfully!!");
     }
+
+ 
 
 
     public function export()

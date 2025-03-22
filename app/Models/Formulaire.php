@@ -42,6 +42,7 @@ class Formulaire extends Model
         'themes_intervention',
         'intervention_themes',
         'partners',
-        'project_financing'
+        'project_financing',
+        'is_invited'
     ];
 }

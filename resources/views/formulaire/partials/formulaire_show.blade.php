@@ -9,7 +9,31 @@
         <div class="max-w-7xl mx-auto flex flex-col gap-5 sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-sm text-gray-900 sm:rounded-lg p-6">
-                <div class="w-full overflow-x-auto">
+                <form action="/forms/invite/{{ $form->id }}" method="POST" class="flex justify-end pb-4 ">
+                    @csrf
+                    <button
+                        {{-- class="border-[1.5px] flex items-center gap-x-2 font-bold border-[#2e539d] rounded-md text-[#2e539d]  w-[10vw] justify-center py-1" --}}
+                        {{-- disabled={{ $form->is_invited }} --}}
+
+                        class="border-[1.5px] flex items-center gap-x-2 font-bold border-[#2e539d] rounded-md text-[#2e539d] px-4 py-1 {{ $form->is_invited ? 'cursor-not-allowed bg-[#68799b26] font-thin border-none' : 'hover:bg-[#2e539d] hover:text-white' }}"                        >
+                        
+                        <template x-if="!form.is_invited">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                 fill="currentColor" stroke="currentColor" stroke-width="1"
+                                 class="bi bi-check2-circle" viewBox="0 0 16 16">
+                              <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0" />
+                              <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                            </svg>
+                          </template>
+                          @if ($form->is_invited)
+                              <span >Invited</span>
+                          @else
+                              <span >Invite NGO </span>
+                          @endif
+                        {{-- <span x-text="form.is_invited ? 'Invited' : 'Invite NGO'"></span> --}}
+                    </button>
+                </form>
+                <div class="w-full overflow-x-auto ">
                     <table class="capitalize w-full md:table block">
                         <tr class="bg-alpha text-white md:table-row hidden">
                             <th class="border border-white p-3 w-[35vw]">Questions</th>

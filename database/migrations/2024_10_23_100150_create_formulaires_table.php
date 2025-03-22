@@ -49,6 +49,7 @@ return new class extends Migration
             $table->text('intervention_themes')->nullable();
             $table->text('partners')->nullable();
             $table->text('project_financing')->nullable();
+            $table->boolean('is_invited')->default(false);
             $table->timestamps();
         });
     }

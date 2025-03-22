@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/formulaire/export', [FormulaireController::class, 'export'])->name('form.export');
+    Route::post('forms/invite/{form}', [FormulaireController::class, 'invite'])->name('forms.invite');
+
 });
 
 require __DIR__ . '/auth.php';
