@@ -12,7 +12,7 @@ class DashboardController extends Controller
         $messages = Message::all()->sortByDesc("created_at");
         $latestmessages = Message::latest()->take(3)->get();
         $articles = Article::all()->sortByDesc("created_at");
-        $latestarticles = Article::latest("created_at")->take(2)->get();
+        $latestarticles = Article::latest("created_at")->take(3)->get();
         return view("dashboard", compact(["messages","latestmessages","articles","latestarticles"]));
     }
 }
