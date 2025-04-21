@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Maps;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $maps = Maps::all();
+        view()->share([
+            'maps'=> $maps
+        ]);
     }
 }
