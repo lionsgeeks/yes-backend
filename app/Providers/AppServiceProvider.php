@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $maps = Maps::all();
-        view()->share([
-            'maps'=> $maps
-        ]);
+        // $maps = Maps::all();
+        // view()->share([
+        //     'maps'=> $maps
+        // ]);
     }
 }
