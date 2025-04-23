@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/create', [AdminController::class, 'store'])->name('admins.store');
 
     Route::get('/formulaire', [FormulaireController::class, 'index'])->name('form.index');
+    Route::post('/formulaire/store', [FormulaireController::class, 'manualStore'])->name('form.manualStore');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -40,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/formulaire/export', [FormulaireController::class, 'export'])->name('form.export');
     Route::post('forms/invite/{form}', [FormulaireController::class, 'invite'])->name('forms.invite');
     Route::resource('maps', MapsController::class);
-    
+
 });
 
 require __DIR__ . '/auth.php';

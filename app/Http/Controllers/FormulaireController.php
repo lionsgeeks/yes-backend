@@ -42,10 +42,31 @@ class FormulaireController extends Controller
         Formulaire::whereIn('id', $formIds)->update(['is_invited' => true]);
 
         return back()->with('success', "Emails has been sent to the selected Ngos");
-
     }
 
-    public function invite(Formulaire $form){
+    public function manualStore(Request $request)
+    {
+        $request->validate([
+            'ngo_name' => 'required',
+            'representative_name' => 'required',
+            'representative_email' => 'required|email'
+        ]);
+
+        Formulaire::create([
+            'name_organization' => $request->ngo_name,
+            'name_representative' => $request->representative_name,
+            'email_representative' => $request->representative_email,
+            'name_tenderer' => $request->representative_name,
+            'email_tenderer' => $request->representative_email,
+        ]);
+
+        
+
+        return redirect()->back();
+    }
+
+    public function invite(Formulaire $form)
+    {
 
         //get email
         $response = Http::post('http://127.0.0.1:8001/api/receive-data', [
@@ -58,6 +79,10 @@ class FormulaireController extends Controller
         ]);
 
         return back()->with('success', "Ngo has been invited to yes learning successfully!!!");
+
+        // dd($response->body());
+        // dd($response->json());
+        // dd($form->email_representative);
     }
 
     /**
@@ -109,7 +134,7 @@ class FormulaireController extends Controller
         return back()->with('success', "The Form and it's Files were deleted Successfully!!");
     }
 
- 
+
 
 
     public function export()

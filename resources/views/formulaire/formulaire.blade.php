@@ -3,10 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Submitted Form Requests') }}
         </h2>
+
     </x-slot>
 
     <div class="py-12" x-data="{
         forms: {{ json_encode($forms) }},
+        ngoID: '',
         searchQuery: '',
         {{-- search function: return true if any of the conditions are met --}}
         matchesSearch(form) {
@@ -17,11 +19,70 @@
                 form.country_registration.toLowerCase().includes(query);
         },
         count: 0,
-        selectedForms: []
-    
+        selectedForms: [],
+
+
+        deleteModal(formID) {
+            this.ngoID = formID;
+            $dispatch('open-modal', 'confirm_delete')
+        }
+
     }">
         <div class="max-w-7xl mx-auto hidden flex-col gap-5 sm:px-6 lg:px-8 md:flex">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900">
+
+                {{-- delete confirmation modal --}}
+                <x-modal name="confirm_delete" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                    {{-- destory --}}
+                    <h1 class="text-xl font-semibold mt-2 p-2 text-center">Are You Sure You Want to Delete This
+                        NGO</h1>
+                    <p class="text-sm text-muted-foreground text-center">This Action is irreversible and will lost all
+                        information on
+                        this NGO</p>
+                    <form :action="'{{ route('forms.destroy', '') }}/' + ngoID" method="POST" class="p-2">
+                        @csrf
+                        @method('DELETE')
+                        <div class="flex justify-end">
+                            <button class="bg-red-600 text-white px-3 py-1 rounded">
+                                Delete NGO
+                            </button>
+                        </div>
+                    </form>
+                </x-modal>
+
+                {{-- NGO creation modal --}}
+                <x-modal name="add_ngo" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                    <form action="{{ route('form.manualStore') }}" method="POST" class="p-2">
+                        <h1 class="text-lg font-semibold mb-2">Add an NGOs: </h1>
+                        @csrf
+
+                        <div class="mb-6 flex flex-col gap-2">
+                            <label for="ngo_name">NGO Name:</label>
+                            <input class="rounded" placeholder="NGO Name" type="text" name="ngo_name" id="ngo_name">
+                        </div>
+                        <div class="my-6 flex flex-col gap-2">
+                            <label for="representative_name">Representative Name:</label>
+                            <input class="rounded" placeholder="Representative Name" type="text"
+                                name="representative_name" id="representative_name">
+                        </div>
+                        <div class="my-6 flex flex-col gap-2">
+                            <label for="representative_email">Representative Email:</label>
+                            <input class="rounded" type="email" placeholder="Representative Email"
+                                name="representative_email" id="representative_email">
+                        </div>
+
+                        <div class="flex justify-end gap-2">
+                            <button x-on:click="$dispatch('close')" type="button"
+                                class="bg-black text-white px-3 py-1 rounded">
+                                Cancel
+                            </button>
+                            <button type="submit" class="bg-alpha text-white rounded px-3 py-1 text-lg">
+                                ADD
+                            </button>
+                        </div>
+                    </form>
+                </x-modal>
+                
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
@@ -37,9 +98,12 @@
 
                     </div>
                     <div class="flex gap-x-2">
+                        <button x-data="" class="bg-alpha px-3 py-1 text-white rounded"
+                            x-on:click.prevent="$dispatch('open-modal', 'add_ngo')">+ ADD NGO
+                        </button>
                         <form action="{{ route('forms.store') }}" method="POST">
                             @csrf
-                             <input type="hidden" name="form_ids[]" :value="selectedForms">
+                            <input type="hidden" name="form_ids[]" :value="selectedForms">
                             <button type="submit"
                                 class="inline-flex items-center px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" width="24"
@@ -92,7 +156,8 @@
                                     <span x-text="form.name_representative"></span>
                                 </td>
                                 <td>
-                                    <span x-text="form.country_registration.replace('_', ' ')"></span>
+                                    <span
+                                        x-text="form.country_registration ? form.country_registration.replace('_', ' ') : 'Not Selected'"></span>
                                 </td>
                                 <td
                                     x-text="new Date(form.created_at).toLocaleString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(',', '')">
@@ -103,25 +168,26 @@
                                         @csrf
                                         @method('GET')
                                         <button class="text-green-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                                             </svg>
                                         </button>
                                     </form>
-                                    {{-- destory --}}
-                                    <form :action="'{{ route('forms.destroy', '') }}/' + form.id" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="text-red-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                            </svg>
-                                        </button>
-                                    </form>
+
+                                    <button x-data="" class="px-3 py-1 text-white rounded"
+                                        {{-- x-on:click.prevent="$dispatch('open-modal', 'confirm_delete')" --}} x-on:click='deleteModal(form.id)'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="#ff0000" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                        </svg>
+                                    </button>
+
+
+
                                     {{-- invite --}}
                                     <form :action="'{{ route('forms.invite', '') }}/' + form.id" method="POST">
                                         @csrf
