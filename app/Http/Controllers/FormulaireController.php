@@ -35,42 +35,20 @@ class FormulaireController extends Controller
     {
         $formIds = array_map('intval', explode(',', $request->form_ids[0]));
         $forms = Formulaire::whereIn('id', $formIds)->get(['email_representative', 'name_organization', 'id']);
-        $formData = Http::post('https://management.youthempowermentsummit.africa/api/selected-ngo', [
+        $formData = Http::post('http://127.0.0.1:8000/api/selected-ngo', [
             'forms' => $forms
         ]);
 
         Formulaire::whereIn('id', $formIds)->update(['is_invited' => true]);
 
         return back()->with('success', "Emails has been sent to the selected Ngos");
+
     }
 
-    public function manualStore(Request $request)
-    {
-        $request->validate([
-            'ngo_name' => 'required',
-            'representative_name' => 'required',
-            'representative_email' => 'required|email'
-        ]);
-
-        Formulaire::create([
-            'name_organization' => $request->ngo_name,
-            'name_representative' => $request->representative_name,
-            'email_representative' => $request->representative_email,
-            'name_tenderer' => $request->representative_name,
-            'email_tenderer' => $request->representative_email,
-        ]);
-
-
-
-        return redirect()->back();
-    }
-
-
-    public function invite(Formulaire $form)
-    {
+    public function invite(Formulaire $form){
 
         //get email
-        $response = Http::post('https://learning.youthempowermentsummit.africa/api/receive-data', [
+        $response = Http::post('http://127.0.0.1:8001/api/receive-data', [
             'email' => $form->email_representative,
             'name' => $form->name_organization
         ]);
@@ -80,10 +58,6 @@ class FormulaireController extends Controller
         ]);
 
         return back()->with('success', "Ngo has been invited to yes learning successfully!!!");
-
-        // dd($response->body());
-        // dd($response->json());
-        // dd($form->email_representative);
     }
 
     /**
