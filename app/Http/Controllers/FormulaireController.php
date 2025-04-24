@@ -63,7 +63,7 @@ class FormulaireController extends Controller
 
 
     public function manualStore(Request $request)
-    {
+    { 
         $request->validate([
             'ngo_name' => 'required',
             'representative_name' => 'required',
