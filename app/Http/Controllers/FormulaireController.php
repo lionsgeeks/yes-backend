@@ -35,7 +35,7 @@ class FormulaireController extends Controller
     {
         $formIds = array_map('intval', explode(',', $request->form_ids[0]));
         $forms = Formulaire::whereIn('id', $formIds)->get(['email_representative', 'name_organization', 'id']);
-        $formData = Http::post('http://127.0.0.1:8000/api/selected-ngo', [
+        $formData = Http::post('https://management.youthempowermentsummit.africa/api/selected-ngo', [
             'forms' => $forms
         ]);
 
@@ -48,7 +48,7 @@ class FormulaireController extends Controller
     public function invite(Formulaire $form){
 
         //get email
-        $response = Http::post('http://127.0.0.1:8001/api/receive-data', [
+        $response = Http::post('https://learning.youthempowermentsummit.africa/api/receive-data', [
             'email' => $form->email_representative,
             'name' => $form->name_organization
         ]);
