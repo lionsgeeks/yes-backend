@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('email');
             $table->decimal('lat'); 
             $table->decimal('lng');
+            $table->string('category')->nullable(); 
+            $table->string('type')->nullable();
+            $table->string('option')->nullable(); 
             $table->string('logo');
             $table->boolean('is_approved')->default(false);
             $table->timestamps();

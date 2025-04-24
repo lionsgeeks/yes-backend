@@ -12,9 +12,17 @@ class MapController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Maps::query();
+        
+        if ($request->has('approved')) {
+            $query->where('is_approved', true);
+        }
+    
+        return response()->json([
+            'data' => $query->get()
+        ]);
     }
 
     /**
@@ -31,7 +39,11 @@ class MapController extends Controller
              'email' => 'required|email',
              'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
              'lat' => 'required|numeric',
-             'lng' => 'required|numeric'
+             'lng' => 'required|numeric',
+             'category' => 'nullable|string',
+             'type' => 'nullable|string',
+             'option' => 'nullable|string',
+ 
          ]);
      
          $path = $request->file('logo')->store('logos', 'public'); 
@@ -46,6 +58,11 @@ class MapController extends Controller
              'logo' => $publicPath,
              'lat' => $validated['lat'],
              'lng' => $validated['lng'],
+             'category' =>  $validated['category'],
+             'type' =>  $validated['type'],
+             'option' =>  $validated['option'],
+ 
+ 
          ]);
      
          return response()->json([
@@ -54,7 +71,11 @@ class MapController extends Controller
          ]);
      }
 
-
+     public function approve(Maps $map)
+     {
+         $map->update(['is_approved' => true]);
+         return back()->with('success', 'Map approved!');
+     }
      
     /**
      * Display the specified resource.
@@ -67,9 +88,39 @@ class MapController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Maps $map)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'url' => 'required|url',
+            'people_working' => 'required|integer',
+            'email' => 'required|email',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
+            'category' => 'nullable|string',
+            'type' => 'nullable|string',
+            'option' => 'nullable|string',
+
+        ]);
+
+        if ($request->hasFile('logo')) {
+            if ($map->logo) {
+                $oldLogoPath = str_replace('/storage/', '', $map->logo);
+                Storage::disk('public')->delete($oldLogoPath);
+            }
+    
+            $path = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = Storage::url($path);
+        }
+    
+        $map->update($validated);
+    
+        return response()->json([
+            'success' => true,
+            'map' => $map
+        ]);
     }
 
     /**

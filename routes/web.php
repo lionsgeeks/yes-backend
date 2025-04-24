@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\SelectController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MesageController;
@@ -39,11 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::post('/formulaire/export', [FormulaireController::class, 'export'])->name('form.export');
     Route::post('forms/invite/{form}', [FormulaireController::class, 'invite'])->name('forms.invite');
     Route::resource('maps', MapsController::class);
-
+    Route::post('/category/store', [SelectController::class, 'store']);
+    Route::post('/type/store', [SelectController::class, 'store']);
+    Route::post('/option/store', [SelectController::class, 'store']);
 });
 
 require __DIR__ . '/auth.php';
