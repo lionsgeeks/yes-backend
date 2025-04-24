@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/formulaire', [FormulaireController::class, 'index'])->name('form.index');
     Route::post('/formulaire/store', [FormulaireController::class, 'manualStore'])->name('form.manualStore');
+    //** TO BE REMOVED AFTER  */
+    Route::get('/formulaire/arrayUpload', [FormulaireController::class, 'arrayUpload'])->name('form.arrayUpload');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
