@@ -56,6 +56,7 @@ class FormulaireController extends Controller
         $form->update([
             'is_invited' => true
         ]);
+        // dd($response->json());
 
         return back()->with('success', "Ngo has been invited to yes learning successfully!!!");
     }
@@ -77,7 +78,7 @@ class FormulaireController extends Controller
             'email_tenderer' => $request->representative_email,
         ]);
 
-        
+
 
         return redirect()->back();
     }
