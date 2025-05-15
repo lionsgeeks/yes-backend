@@ -21,6 +21,15 @@ use App\Http\Controllers\Api\RegisterMapController;
 use App\Http\Controllers\OscController as ControllersOscController;
 use App\Http\Controllers\showController;
 
+Route::get('/', function () {
+    if (request()->redirect == "true") {
+        return redirect()->to('https://youthempowermentsummit.africa/');
+    } else {
+        return view("welcome");
+    }
+});
+
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
