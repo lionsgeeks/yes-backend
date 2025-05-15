@@ -11,20 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maps', function (Blueprint $table) {
+        Schema::create('register_maps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->string('url');
-            $table->string('people_working');
             $table->string('email');
+            $table->string('role');
             $table->decimal('lat'); 
             $table->decimal('lng');
-            $table->string('category')->nullable(); 
-            $table->string('type')->nullable();
-            $table->string('option')->nullable(); 
-            $table->string('logo');
-            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('maps');
+        Schema::dropIfExists('register_maps');
     }
 };

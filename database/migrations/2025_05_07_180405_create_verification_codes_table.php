@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('selects', function (Blueprint $table) {
-
+        Schema::create('verification_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('type', ['category', 'type', 'option'])->nullable();
+            $table->string('email');
+            $table->string('code', 6);
+            $table->timestamp('expires_at');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('selects');
+        Schema::dropIfExists('verification_codes');
     }
 };
