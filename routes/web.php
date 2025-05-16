@@ -27,7 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::resource('forms', FormulaireController::class);
     Route::resource("participants", ParticipantController::class);
-
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::get('/messages', [MesageController::class, 'index'])->name('message.index');
     Route::put('/messages/markread/{message}', [MesageController::class, 'update'])->name('message.markread');
     Route::delete('/messages/delete/{message}', [MesageController::class, 'destroy'])->name('message.delete');
