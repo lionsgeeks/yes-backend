@@ -18,6 +18,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Register_MapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RegisterMapController;
+use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\OscController as ControllersOscController;
 use App\Http\Controllers\showController;
 
@@ -35,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::resource('forms', FormulaireController::class);
     Route::resource("participants", ParticipantController::class);
-
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::get('/messages', [MesageController::class, 'index'])->name('message.index');
     Route::put('/messages/markread/{message}', [MesageController::class, 'update'])->name('message.markread');
     Route::delete('/messages/delete/{message}', [MesageController::class, 'destroy'])->name('message.delete');
@@ -59,11 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/type/store', [SelectController::class, 'store']);
     Route::post('/option/store', [SelectController::class, 'store']);
     Route::delete('/organizations/{id}', [OscController::class, 'destroy']);
-Route::delete('/bailleurs/{id}', [BailleurController::class, 'destroy']);
-Route::delete('/agences/{id}', [AgenceController::class, 'destroy']);
-Route::delete('/entreprises/{id}', [EntrepriseController::class, 'destroy']);
-Route::delete('/publiques/{id}', [PubliqueController::class, 'destroy']);
-Route::delete('/academiques/{id}', [AcademiqueController::class, 'destroy']);
+    Route::delete('/bailleurs/{id}', [BailleurController::class, 'destroy']);
+    Route::delete('/agences/{id}', [AgenceController::class, 'destroy']);
+    Route::delete('/entreprises/{id}', [EntrepriseController::class, 'destroy']);
+    Route::delete('/publiques/{id}', [PubliqueController::class, 'destroy']);
+    Route::delete('/academiques/{id}', [AcademiqueController::class, 'destroy']);
+    Route::get('/details/{type}/{id}', [DetailsController::class, 'show'])->name('details.show');
 });
 
 require __DIR__ . '/auth.php';
