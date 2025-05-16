@@ -31,6 +31,8 @@ class RegisterMapController extends Controller
 
         Mail::to($request->email)->send(new \App\Mail\SendVerificationCode($code));
 
-        return back();
+        return response()->json([
+            "status"=>200
+        ]);
     }
 }
