@@ -155,7 +155,7 @@
                                 </div>
 
                                 <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('Organization', {{ $item->id }})"
+                                    <button onclick="openSubmissionModal('organization', {{ $item->id }})"
                                         class=" text-white text-sm">
                                         <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +164,7 @@
                                         </svg>
                                     </button>
                                     <button onclick="confirmDelete('organizations', {{ $item->id }})"
-                                        class="delete-btn flex items-center px-3 py-1 text-red-500 rounded-lg hover:bg-red-600">
+                                        class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -173,61 +173,15 @@
                                     </button>
 
                                     <a href="{{ route('details.show', ['type' => 'organization', 'id' => $item->id]) }}"
-                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                        class="">
+                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Voir plus
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div id="submission-modal"
-                        class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
-                        <div class="bg-white p-6 rounded-xl shadow-xl w-full max-w-md">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-xl font-medium text-gray-900">Approuver l'élément</h3>
-                                <button onclick="closeSubmissionModal()"
-                                    class="text-gray-400 hover:text-gray-500 focus:outline-none">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <form id="submission-form" method="POST"
-                                action="{{ route('admin.approve', $item->id) }}">
-                                @csrf
-                                <input type="hidden" id="model_type" name="model_type">
-                                <input type="hidden" id="model_id" name="model_id">
-
-                                <div id="model-info" class="mb-6 p-4 bg-gray-50 rounded-lg">
-                                    <p class="text-sm text-gray-600">Chargement des informations...</p>
-                                </div>
-
-                                <div class="flex justify-end space-x-3">
-                                    <button type="button" onclick="closeSubmissionModal()"
-                                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-all">
-                                        Annuler
-                                    </button>
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-beta text-white rounded-lg hover:bg-beta/90 transition-all flex items-center space-x-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7">
-                                            </path>
-                                        </svg>
-                                        <span>Approuver</span>
-                                    </button>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 @endforeach
@@ -303,7 +257,7 @@
                                 </div>
 
                                 <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('Bailleur', {{ $item->id }})"
+                                    <button onclick="openSubmissionModal('bailleur', {{ $item->id }})"
                                         class=" text-white text-sm">
                                         <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -312,7 +266,7 @@
                                         </svg>
                                     </button>
                                     <button onclick="confirmDelete('bailleurs', {{ $item->id }})"
-                                        class="delete-btn flex items-center px-3 py-1 text-red-500 rounded-lg hover:bg-red-600">
+                                        class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -321,13 +275,12 @@
                                     </button>
 
                                     <a href="{{ route('details.show', ['type' => 'bailleur', 'id' => $item->id]) }}"
-                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                        class="">
+                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Voir plus
                                     </a>
                                 </div>
                             </div>
@@ -405,22 +358,21 @@
                                         </svg>
                                     </button>
                                     <button onclick="confirmDelete('agences', {{ $item->id }})"
-                                        class="delete-btn flex items-center px-3 py-1 text-red-500 rounded-lg hover:bg-red-600">
+                                        class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
-                                    
+
                                     <a href="{{ route('details.show', ['type' => 'agence', 'id' => $item->id]) }}"
-                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                        class="">
+                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Voir plus
                                     </a>
                                 </div>
                             </div>
@@ -515,22 +467,21 @@
                                         </svg>
                                     </button>
                                     <button onclick="confirmDelete('entreprises', {{ $item->id }})"
-                                        class="delete-btn flex items-center px-3 py-1 text-red-500 rounded-lg hover:bg-red-600">
+                                        class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
-                                    
+
                                     <a href="{{ route('details.show', ['type' => 'entreprise', 'id' => $item->id]) }}"
-                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                        class="">
+                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Voir plus
                                     </a>
                                 </div>
                             </div>
@@ -615,22 +566,21 @@
                                         </svg>
                                     </button>
                                     <button onclick="confirmDelete('publiques', {{ $item->id }})"
-                                        class="delete-btn flex items-center px-3 py-1 text-red-500 rounded-lg hover:bg-red-600">
+                                        class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
-                                    
+
                                     <a href="{{ route('details.show', ['type' => 'publique', 'id' => $item->id]) }}"
-                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                        class="">
+                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Voir plus
                                     </a>
                                 </div>
                             </div>
@@ -716,7 +666,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-6 flex justify-end">
+                                <div class="mt-6 flex justify-end items-center">
                                     <button onclick="openSubmissionModal('Academique', {{ $item->id }})"
                                         class="text-sm rounded-lg ">
                                         <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
@@ -726,22 +676,21 @@
                                         </svg>
                                     </button>
                                     <button onclick="confirmDelete('academiques', {{ $item->id }})"
-                                        class="delete-btn flex items-center px-3 py-1 text-red-500 rounded-lg hover:bg-red-600">
+                                        class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
-                                    
+
                                     <a href="{{ route('details.show', ['type' => 'academique', 'id' => $item->id]) }}"
-                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
+                                        class="">
+                                        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Voir plus
                                     </a>
                                 </div>
                             </div>
@@ -752,7 +701,45 @@
 
         </div>
     </div>
+    <div id="submission-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-xl shadow-xl w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-medium text-gray-900">Approuver l'élément</h3>
+                <button onclick="closeSubmissionModal()" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
 
+            <form id="submission-form" method="POST" action="">
+                @csrf
+                <input type="hidden" id="model_type" name="model_type">
+                <input type="hidden" id="model_id" name="model_id">
+
+                <div id="model-info" class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-sm text-gray-600">Chargement des informations...</p>
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeSubmissionModal()"
+                        class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-all">
+                        Annuler
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-beta text-white rounded-lg hover:bg-beta/90 transition-all flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Approuver</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
         function filterCards(type) {
@@ -791,65 +778,65 @@
             });
         });
 
-        const modelMap = {
-            'organization': 'App\\Models\\Organization',
-            'bailleur': 'App\\Models\\Bailleur',
-            'agence': 'App\\Models\\Agence',
-            'entreprise': 'App\\Models\\Entreprise',
-            'publique': 'App\\Models\\Publique',
-            'academique': 'App\\Models\\Academique'
-        };
-
-        function openSubmissionModal(modelType, modelId) {
-            if (!modelMap[modelType.toLowerCase()]) {
-                console.error('Type de modèle non reconnu:', modelType);
-                return;
+        function openSubmissionModal(modelTypeKey, modelId) {
+            const modelMap = {
+                organization: "App\\Models\\Organization",
+                bailleur: "App\\Models\\Bailleur",
+                agence: "App\\Models\\Agence",
+                entreprise: "App\\Models\\Entreprise",
+                publique: "App\\Models\\Publique",
+                academique: "App\\Models\\Academique",
             }
 
-            document.getElementById('model_type').value = modelMap[modelType.toLowerCase()];
-            document.getElementById('model_id').value = modelId;
+            const modelType = modelMap[modelTypeKey.toLowerCase()]
+            document.getElementById("model_type").value = modelType
+            document.getElementById("model_id").value = modelId
 
-            const modelInfo = document.getElementById('model-info');
+            const form = document.getElementById("submission-form")
+            form.action = `/maps/${modelId}/approve`
+
+            document.getElementById("submission-modal").classList.remove("hidden")
+            document.getElementById("submission-modal").classList.add("flex")
+
+            const modelInfo = document.getElementById("model-info")
             modelInfo.innerHTML = `
-                <div class="space-y-3">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-beta/20 flex items-center justify-center mr-3">
-                            <svg class="w-6 h-6 text-beta" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-medium text-gray-900">Confirmation requise</p>
-                            <p class="text-sm text-gray-600">Approbation de l'élément sélectionné</p>
-                        </div>
+               <div class="space-y-3">
+                 <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-beta/20 flex items-center justify-center mr-3">
+                    <svg class="w-6 h-6 text-beta" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-900">Confirmation requise</p>
+                    <p class="text-sm text-gray-600">Approbation de l'élément sélectionné</p>
+                </div>
+                </div>
+              <div class="bg-white p-3 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div>
+                        <p class="text-gray-500">Type</p>
+                        <p class="font-medium text-gray-900">${modelTypeKey}</p>
                     </div>
-                    <div class="bg-white p-3 rounded-lg border border-gray-200">
-                        <div class="grid grid-cols-2 gap-2 text-sm">
-                            <div>
-                                <p class="text-gray-500">Type</p>
-                                <p class="font-medium text-gray-900">${modelType}</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-500">ID</p>
-                                <p class="font-medium text-gray-900">${modelId}</p>
-                            </div>
-                        </div>
+                    <div>
+                        <p class="text-gray-500">ID</p>
+                        <p class="font-medium text-gray-900">${modelId}</p>
                     </div>
                 </div>
-            `;
-
-            const modal = document.getElementById('submission-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.classList.add('overflow-hidden');
+                </div>
+                  </div>
+            `
         }
 
         function closeSubmissionModal() {
-            const modal = document.getElementById('submission-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.classList.remove('overflow-hidden');
+            document.getElementById("submission-modal").classList.add("hidden")
+            document.getElementById("submission-modal").classList.remove("flex")
+            document.getElementById("model_type").value = ""
+            document.getElementById("model_id").value = ""
         }
+
+
+
 
         function confirmDelete(modelType, id) {
             if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
