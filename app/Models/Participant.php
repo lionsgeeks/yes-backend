@@ -15,6 +15,7 @@ class Participant extends Model
         "mail",
         "phone",
         "country",
-        "logo"
+        "logo",
+        "invitedToApp",
     ];
 }

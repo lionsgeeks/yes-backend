@@ -45,5 +45,7 @@ Route::post('approved', [ShowController::class, 'getApprovedGrouped']);
 // Route::post('/maps', [MapController::class, 'store']);
 // Route::put('/maps/{map}', [MapController::class, 'update']);
 // Route::post('/maps/{map}/approve', [MapController::class, 'approve'])->name('maps.approve'); 
+Route::post("/ngo/invite/{formulaire}",[FormulaireController::class,"inviteToApp"])->name("ngo.invite");
+Route::post("/participants/invite/{participant}",[ParticipantsController::class,"inviteToApp"])->name("participants.invite");
 Route::get('/selects', [SelectController::class, 'index']);
 Route::post('/type/store', [SelectController::class, 'store']);

@@ -15,6 +15,7 @@
                         <th class="max-[430px]:hidden">Country</th>
                         <th class="max-[430px]:hidden">Apply Date</th>
                         <th class="">More details</th>
+                        <th class="">Invite to App</th>
                     </thead>
                     <tbody class="">
                         <template x-for="participant in participants" :key="participant.id">
@@ -49,6 +50,21 @@
                                             </svg>
                                         </button>
                                     </form>
+                                </td>
+                                <td class='lg:w-[20%]'>
+                                    <template x-if="participant.invitedToApp">
+                                        <button
+                                            class="bg-green-500 px-4 py-2 rounded-lg text-green-700 ">Invited</button>
+                                    </template>
+                                    <template x-if="!participant.invitedToApp">
+                                        <form :action="'{{ route('participants.invite', '') }}/' + participant.id"
+                                            method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <button x-on:click="inviteToApp(participant.id)"
+                                                class="bg-alpha px-4 py-2 rounded-lg text-white ">Invite</button>
+                                        </form>
+                                    </template>
                                 </td>
                             </tr>
                         </template>

@@ -134,6 +134,7 @@
                         <th>Country</th>
                         <th>Apply Date</th>
                         <th>Actions</th>
+                        <th>Invite to Yes mobile</th>
                         {{-- <th>More Details</th>
                         <th>Delete Form</th>
                         <th>Invite to Yes Learning</th> --}}
@@ -214,6 +215,21 @@
                                             <span x-text="form.is_invited ? 'Invited' : 'Invite NGO'"></span>
                                         </button>
                                     </form>
+                                </td>
+                                <td class='lg:w-[20%]'>
+                                    <template x-if="form.is_invited_app">
+                                        <button
+                                            class="bg-green-500 px-4 py-2 rounded-lg text-green-700 ">Invited</button>
+                                    </template>
+                                    <template x-if="!form.is_invited_app">
+                                        <form :action="'{{ route('ngo.invite', '') }}/' + form.id"
+                                            method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <button x-on:click="inviteToApp(participant.id)"
+                                                class="bg-alpha px-4 py-2 rounded-lg text-white ">Invite</button>
+                                        </form>
+                                    </template>
                                 </td>
                             </tr>
                         </template>

@@ -7,6 +7,7 @@ use App\Mail\FormApproved;
 use App\Models\Formulaire;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class FormulaireController extends Controller
@@ -116,5 +117,25 @@ class FormulaireController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function inviteToApp(Formulaire $formulaire)
+    {
+        // dd($formulaire);
+        // TODO: change Url 
+        $response = Http::post('https://app.youthempowermentsummit.africa/api/register/participant', [
+            "name" => $formulaire->name_organization,
+            // "company" => $formulaire->organisation,
+            "email" => $formulaire->email_representative,
+            "country" => $formulaire->country_registration,
+            'role' => 'ngo',
+        ]);
+        if ($response->successful()) {
+            $formulaire->update([
+                'is_invited_app' => true
+            ]);
+            return back()->with("success", "Invitation sent successfully");
+        } else {
+            return back()->with("error", "Failed to send invitation");
+        }
     }
 }
