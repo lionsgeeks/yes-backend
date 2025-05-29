@@ -68,6 +68,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/publiques/{id}', [PubliqueController::class, 'destroy']);
     Route::delete('/academiques/{id}', [AcademiqueController::class, 'destroy']);
     Route::get('/details/{type}/{id}', [DetailsController::class, 'show'])->name('details.show');
+    // Dans Backend 1
+Route::get('/redirect-to-app2', function () {
+    $user = Auth::user();
+
+    $url = URL::temporarySignedRoute(
+        'dummy.route', now()->addMinutes(2), ['email' => $user->email]
+    );
+
+    $query = parse_url($url, PHP_URL_QUERY);
+
+    return redirect("https://backend2.test/sso-login?$query");
+});
+
 });
 
 require __DIR__ . '/auth.php';

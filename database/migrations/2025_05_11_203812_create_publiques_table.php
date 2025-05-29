@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('publiques', function (Blueprint $table) {
             $table->id();
-            $table->string('institution_name');
-            $table->string('institution_type');
-            $table->string('country');
+            $table->string('institution_name')->nullable();
+            $table->string('institution_type')->nullable();
+            $table->string('country')->nullable();
             $table->string('website')->nullable();
             $table->string('logo_path')->nullable();
-            $table->string('email');
-            $table->string('phone_code');
-            $table->string('phone_number');
+            $table->string('email')->nullable();
+            $table->string('phone_code')->nullable();
+            $table->string('phone_number')->nullable();
             $table->text('address')->nullable();
             $table->string('youth_contact_name')->nullable();
             $table->string('youth_contact_position')->nullable();

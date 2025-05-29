@@ -15,12 +15,11 @@ class Register_MapController extends Controller
         $request->validate([
             'name'  => 'required|string',
             'email' => 'required|email|',
-            'role'  => 'required|string',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric'
         ]);
 
-        Register_Map::create($request->only('name', 'email', 'role', 'lat', 'lng'));
+        Register_Map::create($request->only('name', 'email', 'lat', 'lng'));
 
         $code = str_pad(random_int(10000, 999999), 6, '0');
         VerificationCode::create([

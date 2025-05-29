@@ -71,6 +71,21 @@
                 </svg>
                 Maps
             </a>
+            <a href="https://app.youthempowermentsummit.africa"
+                target="_blank" rel="noopener noreferrer"
+                class="flex items-center border border-blue-500 rounded-full px-4 py-1 mt-48 text-white hover:bg-[#f5e7c6] hover:text-alpha transition">
+                <svg class="w-5 h-5 mr-2" viewBox="0 0 1024 1024" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M725.333 1024H298.667a128 128 0 0 1-128-128V128a128 128 0 0 1 128-128h426.666a128 128 0 0 1 128 128v768a128 128 0 0 1-128 128zM298.667 85.333A42.667 42.667 0 0 0 256 128v768a42.667 42.667 0 0 0 42.667 42.667h426.666A42.667 42.667 0 0 0 768 896V128a42.667 42.667 0 0 0-42.667-42.667z" />
+                    <path
+                        d="M469.333 853.333a42.667 42.667 0 1 0 85.334 0 42.667 42.667 0 1 0-85.334 0zM554.667 213.333h-85.334a42.667 42.667 0 0 1 0-85.333h85.334a42.667 42.667 0 0 1 0 85.333z" />
+                </svg>
+
+                <span class="mr-2">Get Back App</span>
+
+            </a>
+
         </div>
     </div>
 </div>

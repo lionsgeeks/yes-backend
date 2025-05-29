@@ -28,17 +28,17 @@ class BailleurController extends Controller
             'email_contact' => 'required|email|max:255',
             'telephone' => 'required|string|max:20',
             'priorites_thematiques' => 'required|string|max:500',
-            'modalites_soutien' => 'required|array',
-            'modalites_soutien.*' => 'string',
-            'financement_min' => 'nullable|numeric',
-            'financement_max' => 'nullable|numeric',
-            'budget_annuel' => 'required|numeric|min:0',
-            'criteres_eligibilite' => 'required|string|max:1000',
-            'projets_phares' => 'required|array|min:1',
-            'projets_phares.*' => 'string|max:500',
-            'approche_impact' => 'required|string|max:1000',
-            'partenaires_actuels' => 'required|string|max:1000',
-            'procedure_soumission' => 'required|string|max:1000',
+           
+            // 'projets_phares' => 'required|array|min:1',
+            // 'projets_phares.*' => 'string|max:500',
+            // 'approche_impact' => 'required|string|max:1000',
+            // 'partenaires_actuels' => 'required|string|max: // 'modalites_soutien' => 'required|array',
+            // 'modalites_soutien.*' => 'string',
+            // 'financement_min' => 'nullable|numeric',
+            // 'financement_max' => 'nullable|numeric',
+            // 'budget_annuel' => 'required|numeric|min:0',
+            // 'criteres_eligibilite' => 'required|string|max:1000',1000',
+            // 'procedure_soumission' => 'required|string|max:1000',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
 
@@ -52,7 +52,7 @@ class BailleurController extends Controller
         }
     
         $validated['contact_responsable'] = $request->contact_responsable;
-        $validated['representation_afrique'] = $request->representation_afrique;
+        // $validated['representation_afrique'] = $request->representation_afrique;
         $socials = [
             'linkedin' => $request->linkedin_url2 ?? null,
             'twitter' => $request->twitter_url2 ?? null

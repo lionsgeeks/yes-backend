@@ -13,7 +13,6 @@ class Register_Map extends Model
     protected $fillable = [
         'name',
         'email',
-        'role',
         'lat',
         'lng'
     ];

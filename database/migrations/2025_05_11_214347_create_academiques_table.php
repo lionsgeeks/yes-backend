@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('logo_path')->nullable();
-            $table->string('type_institution');
-            $table->string('pays');
+            $table->string('type_institution')->nullable();
+            $table->string('pays')->nullable();
             $table->string('site_web')->nullable();
             $table->string('departement')->nullable();
-            $table->string('email');
-            $table->string('telephone');
+            $table->string('email')->nullable();
+            $table->string('telephone')->nullable();
             $table->string('contact_nom')->nullable();
             $table->string('contact_fonction')->nullable();
             $table->string('contact_email')->nullable();
