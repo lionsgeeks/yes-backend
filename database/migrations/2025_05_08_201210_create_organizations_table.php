@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('logo')->nullable();
-            $table->integer('creation_year');
-            $table->string('legal_status');
+            $table->integer('creation_year')->nullable();
+            $table->string('legal_status')->nullable();
             $table->string('other_legal_status')->nullable();
             $table->string('country')->nullable(); 
             $table->string('regions')->nullable();
@@ -29,14 +29,14 @@ return new class extends Migration
             $table->string('twitter_url')->nullable();
             $table->string('linkedin_url')->nullable();
             $table->string('instagram_url')->nullable();
-            $table->string('main_email');
-            $table->string('phone');
+            $table->string('main_email')->nullable();
+            $table->string('phone')->nullable();
             $table->text('postal_address')->nullable();
-            $table->string('contact_name');
-            $table->string('contact_function');
-            $table->string('contact_email');
+            $table->string('contact_name')->nullable();
+            $table->string('contact_function')->nullable();
+            $table->string('contact_email')->nullable();
             $table->json('intervention_areas')->nullable();
-            $table->text('target_groups');
+            $table->text('target_groups')->nullable();
             $table->integer('annual_beneficiaries')->nullable();
             $table->string('program_title')->nullable();
             $table->text('program_description')->nullable();

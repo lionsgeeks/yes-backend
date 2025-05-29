@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('role');
             $table->decimal('lat'); 
             $table->decimal('lng');
             $table->timestamps();

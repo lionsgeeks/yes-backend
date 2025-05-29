@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('agences', function (Blueprint $table) {
                 $table->id();
-                $table->string('nom');
+                $table->string('nom')->nullable();
                 $table->string('logo')->nullable();
-                $table->string('type_organisation');
-                $table->string('pays_representes');
-                $table->string('couverture_afrique');
+                $table->string('type_organisation')->nullable();
+                $table->string('pays_representes')->nullable();
+                $table->string('couverture_afrique')->nullable();
                 $table->string('site_web')->nullable();
                 $table->string('email_institutionnel');
                 $table->text('bureaux_afrique')->nullable();
-                $table->string('contact_jeunesse');
+                $table->string('contact_jeunesse')->nullable();
                 $table->string('cadre_strategique')->nullable();
                 $table->text('priorites_thematiques')->nullable();
                 $table->decimal('budget', 15, 2)->nullable();
