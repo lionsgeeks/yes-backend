@@ -27,31 +27,31 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $osc = Organization::all();
-        // view()->share([
-        //     'osc' => $osc
-        // ]);
-        // $bailleur = Bailleur::all();
-        // view()->share([
-        //     'bailleur' => $bailleur
-        // ]);
-        // $agence = Agence::all();
-        // view()->share([
-        //     'agence' => $agence
-        // ]);
-        // $entreprise = Entreprise::all();
-        // view()->share([
-        //     'entreprise' => $entreprise
-        // ]);
+        $osc = Organization::all();
+        view()->share([
+            'osc' => $osc
+        ]);
+        $bailleur = Bailleur::all();
+        view()->share([
+            'bailleur' => $bailleur
+        ]);
+        $agence = Agence::all();
+        view()->share([
+            'agence' => $agence
+        ]);
+        $entreprise = Entreprise::all();
+        view()->share([
+            'entreprise' => $entreprise
+        ]);
 
-        // $publique = Publique::all();
-        // view()->share([
-        //     'publique' => $publique
-        // ]);
+        $publique = Publique::all();
+        view()->share([
+            'publique' => $publique
+        ]);
 
-        // $academique = Academique::all();
-        // view()->share([
-        //     'academique' => $academique
-        // ]);
+        $academique = Academique::all();
+        view()->share([
+            'academique' => $academique
+        ]);
     }
 }
