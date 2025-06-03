@@ -181,7 +181,8 @@
                                 </tr>
                                 <tr class="border-b border-gray-300">
                                     <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Couverture géographique</th>
-                                    <td class="p-4">{{ $item->couverture_geographique }}</td>
+                                    <td class="p-4">    {{ is_array($item->couverture_geographique) ? implode(', ', $item->couverture_geographique) : $item->couverture_geographique }}
+</td>
                                 </tr>
                                 <tr class="border-b border-gray-300">
                                     <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Site web</th>
@@ -234,45 +235,10 @@
                                 </tr>
 
                                 <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Priorités thématiques</th>
+                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Bonnes Pratiques</th>
                                     <td class="p-4">{{ $item->priorites_thematiques }}</td>
                                 </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Modalités de soutien</th>
-                                    <td class="p-4">{{ $item->modalites_soutien }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Financement minimum</th>
-                                    <td class="p-4">{{ $item->financement_min }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Financement maximum</th>
-                                    <td class="p-4">{{ $item->financement_max }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Budget annuel</th>
-                                    <td class="p-4">{{ $item->budget_annuel }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Critères d'éligibilité</th>
-                                    <td class="p-4">{{ $item->criteres_eligibilite }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Projets phares</th>
-                                    <td class="p-4">{{ $item->projets_phares }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Approche d'impact</th>
-                                    <td class="p-4">{{ $item->approche_impact }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Partenaires actuels</th>
-                                    <td class="p-4">{{ $item->partenaires_actuels }}</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th class="text-left p-4 bg-[#e0ecff9d] text-black w-1/3">Procédure de soumission</th>
-                                    <td class="p-4">{{ $item->procedure_soumission }}</td>
-                                </tr>
+                             
                             </tbody>
                         </table>
                     </div>
