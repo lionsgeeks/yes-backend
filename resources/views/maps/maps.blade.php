@@ -154,15 +154,23 @@
 
                                 </div>
 
-                                <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('organization', {{ $item->id }})"
-                                        class=" text-white text-sm">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
+                                <div class="mt-6 flex justify-end items-center">
+                                    @php
+                                        $firstShow = optional($item->shows->first());
+                                    @endphp
+
+                                    @if ($firstShow && !$firstShow->approve)
+                                        <button onclick="openSubmissionModal('organization', {{ $item->id }})"
+                                            class="text-white text-sm">
+                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    @elseif($firstShow && $firstShow->approve)
+                                        <h1 class="text-green-600 font-semibold">Approved</h1>
+                                    @endif
                                     <button onclick="confirmDelete('organizations', {{ $item->id }})"
                                         class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
@@ -256,15 +264,23 @@
 
                                 </div>
 
-                                <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('bailleur', {{ $item->id }})"
-                                        class=" text-white text-sm">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
+                                <div class="mt-6 flex justify-end items-center">
+                                    @php
+                                        $firstShow = optional($item->shows->first());
+                                    @endphp
+
+                                    @if ($firstShow && !$firstShow->approve)
+                                        <button onclick="openSubmissionModal('bailleur', {{ $item->id }})"
+                                            class="text-white text-sm">
+                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    @elseif($firstShow && $firstShow->approve)
+                                        <h1 class="text-green-600 font-semibold">Approved</h1>
+                                    @endif
                                     <button onclick="confirmDelete('bailleurs', {{ $item->id }})"
                                         class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
@@ -348,15 +364,23 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('Agence', {{ $item->id }})"
-                                        class="text-sm rounded-lg">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
+                                <div class="mt-6 flex justify-end items-center">
+                                    @php
+                                        $firstShow = optional($item->shows->first());
+                                    @endphp
+
+                                    @if ($firstShow && !$firstShow->approve)
+                                        <button onclick="openSubmissionModal('Agence', {{ $item->id }})"
+                                            class="text-white text-sm">
+                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    @elseif($firstShow && $firstShow->approve)
+                                        <h1 class="text-green-600 font-semibold">Approved</h1>
+                                    @endif
                                     <button onclick="confirmDelete('agences', {{ $item->id }})"
                                         class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
@@ -457,15 +481,23 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('Entreprise', {{ $item->id }})"
-                                        class="text-sm rounded-lg">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
+                                <div class="mt-6 flex justify-end items-center">
+                                    @php
+                                        $firstShow = optional($item->shows->first());
+                                    @endphp
+
+                                    @if ($firstShow && !$firstShow->approve)
+                                        <button onclick="openSubmissionModal('Entreprise', {{ $item->id }})"
+                                            class="text-white text-sm">
+                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    @elseif($firstShow && $firstShow->approve)
+                                        <h1 class="text-green-600 font-semibold">Approved</h1>
+                                    @endif
                                     <button onclick="confirmDelete('entreprises', {{ $item->id }})"
                                         class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
@@ -556,15 +588,23 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-6 flex justify-end">
-                                    <button onclick="openSubmissionModal('Publique', {{ $item->id }})"
-                                        class="text-sm rounded-lg">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
+                                <div class="mt-6 flex justify-end items-center">
+                                    @php
+                                        $firstShow = optional($item->shows->first());
+                                    @endphp
+
+                                    @if ($firstShow && !$firstShow->approve)
+                                        <button onclick="openSubmissionModal('Publique', {{ $item->id }})"
+                                            class="text-white text-sm">
+                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    @elseif($firstShow && $firstShow->approve)
+                                        <h1 class="text-green-600 font-semibold">Approved</h1>
+                                    @endif
                                     <button onclick="confirmDelete('publiques', {{ $item->id }})"
                                         class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
@@ -667,14 +707,22 @@
                                 </div>
 
                                 <div class="mt-6 flex justify-end items-center">
-                                    <button onclick="openSubmissionModal('Academique', {{ $item->id }})"
-                                        class="text-sm rounded-lg ">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </button>
+                                    @php
+                                        $firstShow = optional($item->shows->first());
+                                    @endphp
+
+                                    @if ($firstShow && !$firstShow->approve)
+                                        <button onclick="openSubmissionModal('Academique', {{ $item->id }})"
+                                            class="text-white text-sm">
+                                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                        </button>
+                                    @elseif($firstShow && $firstShow->approve)
+                                        <h1 class="text-green-600 font-semibold">Approved</h1>
+                                    @endif
                                     <button onclick="confirmDelete('academiques', {{ $item->id }})"
                                         class="delete-btn flex items-center px-3 py-1 text-red-500 ">
                                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor"
