@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Academique;
+use App\Models\shows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,7 +37,7 @@ class AcademiqueController extends Controller
             'opportunites_collaboration' => 'nullable|string',
             'conferences' => 'nullable|string',
             'ateliers' => 'nullable|string',
-            'publications'=>'nullable',
+            'publications' => 'nullable',
             'lat' => 'required|numeric',
             'lng' => 'required|numeric',
         ]);
@@ -65,25 +66,26 @@ class AcademiqueController extends Controller
         }
 
         $academique = Academique::create($data);
-        
+
         return response()->json($academique, 201);
     }
     public function destroy($id)
     {
         try {
             $item = Academique::findOrFail($id);
-            
+
             if ($item->logo) {
                 Storage::delete('public/' . $item->logo);
             }
-            
+
             $item->delete();
+            shows::where('showable_id', $id)->first()->delete();
+
 
             return response()->json([
                 'success' => true,
                 'message' => 'Élément supprimé avec succès'
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -91,5 +93,4 @@ class AcademiqueController extends Controller
             ], 500);
         }
     }
-
 }

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Publique;
+use App\Models\shows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -72,6 +73,7 @@ class PubliqueController extends Controller
             }
             
             $item->delete();
+            shows::where('showable_id', $id)->first()->delete();
 
             return response()->json([
                 'success' => true,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Agence;
+use App\Models\shows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -48,10 +49,10 @@ class AgenceController extends Controller
             $path = $file->store('logos', 'public');
             $data['logo'] = $path;
         }
-    
-        $agence =Agence::create($data);
-    
-        
+
+        $agence = Agence::create($data);
+
+
         if ($request->hasFile('cadre_strategique')) {
             $validated['cadre_strategique'] = $request->file('cadre_strategique')->store('agences/cadres', 'public');
         }
@@ -67,24 +68,25 @@ class AgenceController extends Controller
         // $agence = Agence::create($validated);
         $validated['user_id'] = auth()->id();
 
-       return back();
+        return back();
     }
     public function destroy($id)
     {
         try {
             $item = Agence::findOrFail($id);
-            
+
             if ($item->logo) {
                 Storage::delete('public/' . $item->logo);
             }
-            
+
             $item->delete();
+            shows::where('showable_id', $id)->first()->delete();
+
 
             return response()->json([
                 'success' => true,
                 'message' => 'Élément supprimé avec succès'
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

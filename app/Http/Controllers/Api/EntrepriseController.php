@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Entreprise;
+use App\Models\shows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,7 +52,7 @@ class EntrepriseController extends Controller
             $path = $file->store('logos', 'public');
             $data['logo'] = $path;
         }
-    
+
 
         $entreprise = Entreprise::create($data);
         $validated['user_id'] = auth()->id();
@@ -66,18 +67,19 @@ class EntrepriseController extends Controller
     {
         try {
             $item = Entreprise::findOrFail($id);
-            
+
             if ($item->logo) {
                 Storage::delete('public/' . $item->logo);
             }
-            
+
             $item->delete();
+            shows::where('showable_id', $id)->first()->delete();
+
 
             return response()->json([
                 'success' => true,
                 'message' => 'Élément supprimé avec succès'
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

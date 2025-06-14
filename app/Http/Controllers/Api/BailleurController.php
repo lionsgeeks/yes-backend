@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bailleur;
+use App\Models\shows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +29,7 @@ class BailleurController extends Controller
             'email_contact' => 'required|email|max:255',
             'telephone' => 'required|string|max:20',
             'priorites_thematiques' => 'required|string|max:500',
-           
+
             // 'projets_phares' => 'required|array|min:1',
             // 'projets_phares.*' => 'string|max:500',
             // 'approche_impact' => 'required|string|max:1000',
@@ -50,7 +51,7 @@ class BailleurController extends Controller
             $path = $file->store('logos', 'public');
             $data['logo_path'] = $path;
         }
-    
+
         $validated['contact_responsable'] = $request->contact_responsable;
         // $validated['representation_afrique'] = $request->representation_afrique;
         $socials = [
@@ -70,18 +71,19 @@ class BailleurController extends Controller
     {
         try {
             $item = Bailleur::findOrFail($id);
-            
+
             if ($item->logo) {
                 Storage::delete('public/' . $item->logo);
             }
-            
+
             $item->delete();
+            shows::where('showable_id', $id)->first()->delete();
+
 
             return response()->json([
                 'success' => true,
                 'message' => 'Élément supprimé avec succès'
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

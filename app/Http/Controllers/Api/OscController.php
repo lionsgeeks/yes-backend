@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
+use App\Models\shows;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -83,7 +84,9 @@ class OscController extends Controller
                 Storage::delete('public/' . $item->logo);
             }
 
+
             $item->delete();
+            shows::where('showable_id', $id)->first()->delete();
 
             return response()->json([
                 'success' => true,
